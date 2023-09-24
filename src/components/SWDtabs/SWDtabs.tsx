@@ -1,9 +1,6 @@
-import { ReactNode, useState, Children, FC, ReactElement } from 'react';
+import { ReactNode, useState, FC, Children, CSSProperties } from 'react';
 
-type TabChildProps = {
-  'data-tab': string;
-  children: React.ReactNode;
-};
+import { Tabs } from './SWDtabs-style'
 
 export type SWDtabsProps = {
   tabName1: string;
@@ -19,32 +16,35 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   const [activeTab, setActiveTab] = useState(tabName1);
 
   return (
-    <div className="tabs-container">
-      <div className="tabs">
-        <button
+    <Tabs.Wrapper>
+      <Tabs.Bar className="tabs">
+        <Tabs.Control
           className={activeTab === tabName1 ? 'active' : ''}
-          onClick={() => setActiveTab(tabName1)}
-        >
+          onClick={() => setActiveTab(tabName1)}>
           {tabName1}
-        </button>
-        <button
+        </Tabs.Control>
+        <Tabs.Control
           className={activeTab === tabName2 ? 'active' : ''}
-          onClick={() => setActiveTab(tabName2)}
-        >
+          onClick={() => setActiveTab(tabName2)}>
           {tabName2}
-        </button>
-      </div>
-      <div className="tab-content">
-        {Children.map(children, (child) => {
-          const tabChild = child as ReactElement<TabChildProps>;
-          if (tabChild.props['data-tab'] === activeTab) {
-            return tabChild;
-          }
-          return null;
+        </Tabs.Control>
+      </Tabs.Bar>
+      <Tabs.Container className="tab-content">
+        {Children.map(children, (child, index) => {
+          const isActive = activeTab === (index === 0 ? tabName1 : tabName2);
+          const tabStyle: CSSProperties = {
+            display: isActive ? 'block' : 'none',
+          };
+          return (
+            <div style={tabStyle}>
+              {child}
+            </div>
+          );
         })}
-      </div>
-    </div>
+      </Tabs.Container>
+    </Tabs.Wrapper>
   );
 };
 
-export default SWDtabs;
+
+export default SWDtabs

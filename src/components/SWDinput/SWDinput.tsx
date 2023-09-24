@@ -27,6 +27,8 @@ export const SWDInput: FC<SWDInputProps> = ({
     onChange(e);
   };
 
+  const pattern = type === "number" ? "\\d*" : undefined;
+
   return (
     <Input.Wrapper htmlFor={id} {...props}>
       {image && (
@@ -39,6 +41,7 @@ export const SWDInput: FC<SWDInputProps> = ({
       </Input.LabelText>
       <Input.Field
         type={type}
+        pattern={pattern}
         id={id}
         value={value}
         onChange={handleChange}

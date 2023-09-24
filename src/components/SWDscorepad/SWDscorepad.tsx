@@ -1,9 +1,9 @@
 import { useState, ChangeEvent, FC } from 'react'
 import { SWDInput } from '../SWDinput/SWDinput'
+import SWDvictories from '../SWDvictories/SWDvictories';
 import { initialInputs, agoraInputs, pantheonInputs, InputItem } from '../../data/inputValues'
 
 // import total from '../../assets/images/total'
-import vp from '../../assets/images/vp.svg'
 
 export type SWDscorepadProps = {
   name: string
@@ -13,8 +13,8 @@ export type SWDscorepadProps = {
 
 export const SWDscorepad: FC<SWDscorepadProps> = ({
   name,
-  showAgora,
-  showPantheon,
+  showAgora = false,
+  showPantheon = false,
 }: SWDscorepadProps) => {
   const [inputs, setInputs] = useState<InputItem[]>(initialInputs)
   const [agoraInputsState, setAgoraInputs] = useState<InputItem[]>(agoraInputs)
@@ -77,8 +77,8 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '780px', margin: '0 auto' }}>
-        <h2>{name}</h2>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', margin: '0 auto' }}>
+        <h2 style={{ display: 'none' }}>{name}</h2>
         {inputs.map((input) => (
           <SWDInput
             key={input.id}
@@ -103,7 +103,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
                 onChange={(e) => handleAgoraInputChange(e, input.id)}
                 value={input.value}
                 image={input.image}
-                placeholder="Ingrese un número"
+                placeholder={input.placeholder}
               />
             ))}
           </>
@@ -120,28 +120,13 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
                 onChange={(e) => handlePantheonInputChange(e, input.id)}
                 value={input.value}
                 image={input.image}
-                placeholder="Ingrese un número"
+                placeholder={input.placeholder}
               />
             ))}
           </>
         )}
-        <div>
-          <button>
-            <img src={vp} alt="" aria-hidden="true" />
-            Military victory
-          </button>
-          <button>
-            <img src={vp} alt="" aria-hidden="true" />
-            Progress victory
-          </button>
-          {showAgora && (
-            <button>
-              <img src={vp} alt="" aria-hidden="true" />
-              Political victory
-            </button>
-          )}
-        </div>
         <output>Total: {total}</output>
+        <SWDvictories showAgora={showAgora}></SWDvictories>
       </div>
     </>
   )

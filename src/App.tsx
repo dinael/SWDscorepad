@@ -1,12 +1,12 @@
 import SWDscorepad from './components/SWDscorepad/SWDscorepad'
 import SWDtabs from './components/SWDtabs/SWDtabs';
+
 //import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-
-const player1 = 'Juan';
-const player2 = 'Manolo';
-const agora = false;
-const pantheon = false;
+const player1 = 'Marian';
+const player2 = 'Dinael';
+const agora = true;
+const pantheon = true;
 
 function App() {
 
@@ -24,12 +24,14 @@ function App() {
 
   return (
     <>
-      <div style={{ display: 'flex', gap: '4rem' }}>
-        <SWDtabs tabName1="Ludio I" tabName2="Ludio II">
+      <header>header</header>
+      <main style={{ display: 'grid', gap: '4rem', margin: '0 auto', maxInlineSize: '35rem' }}>
+        <SWDtabs tabName1={playerOne} tabName2={playerTwo}>
           <SWDscorepad data-tab="Ludio I" name={playerOne} showAgora={agora} showPantheon={pantheon} />
           <SWDscorepad data-tab="Ludio II" name={playerTwo} showAgora={agora} showPantheon={pantheon} />
         </SWDtabs>
-      </div>
+      </main>
+      <footer>footer</footer>
     </>
   )
 }
