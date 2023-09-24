@@ -1,2 +1,2 @@
-# SWDscorepad
-7 Worders Duel Scorepad
+# 7 Wonders Duel Scorepad
+A interactive 7 Wonders Duel Scorepad calculator
