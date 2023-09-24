@@ -32,7 +32,13 @@ export const initialInputs: InputItem[] = [
 ]
 
 export const agoraInputs: InputItem[] = [
-  { label: "Chambers", id: "inputAgora1", value: "", placeholder: "VP in blue cards", image: chamber },
+  {
+    label: "Chambers",
+    id: "inputAgora1",
+    value: "",
+    placeholder: "VP chamber",
+    image: chamber
+  },
 ]
 
 export const pantheonInputs: InputItem[] = [
@@ -40,7 +46,7 @@ export const pantheonInputs: InputItem[] = [
     label: "Divinity cards",
     id: "inputPantheon1",
     value: "",
-    placeholder: "VP in blue cards",
+    placeholder: "VP in divinities cards",
     image: cardWhite,
   },
 ]

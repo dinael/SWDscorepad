@@ -3,10 +3,10 @@ import styled, { css } from 'styled-components'
 export const Input = {
   Wrapper: styled.label`
     display: grid;
-    grid-template-columns: 2.75rem 1fr;
+    grid-template-columns: 3.5rem 1fr;
     align-items: center;
     gap: 1.5rem;
-    inline-size: 100;
+    inline-size: 100%;
   `,
   LabelText: styled.span<{ hasImage?: boolean }>`
     ${(props) => props.hasImage
@@ -28,15 +28,28 @@ export const Input = {
 
   ImageWrapper: styled.span`
     display: flex;
+    flex: 1 0 auto;
     justify-content: center;
     align-items: center;
-    inline-size: 2.75rem;
+    min-inline-size: 2.75rem;
     block-size: 2.75rem;
   `,
+  Equal: styled.span`
+    line-height: 0;
+    font-size: 2.875rem;
+    padding-inline: 0.25rem;
+    color: var(--SWD-color-primary);
+  `,
   Image: styled.img`
+    display: block;
+    width: 100%;
+    height: auto;
   `,
   Field: styled.input`
+    display: flex;
+    flex: 1 1 100%;
     font-size: 1.5rem;
+    inline-size: calc(100% - 2.75rem);
     font-weight: 800;
     appearance: none;
     -webkit-appearance: none;
