@@ -19,7 +19,7 @@ const Victory = {
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    border: max(0.25rem, 4px) solid var(--SWD-color-primary);
+    border: none;
     border-radius: max(0.5rem, 8px);
     cursor: pointer;
     transition: color .35s ease-in-out, background .35s ease-in-out;

@@ -7,7 +7,8 @@
   --SWD-background-color: hsl(195, 100%, 2%);
   --SWD-color-primary: hsl(48, 98%, 49%);
   --SWD-text-color: hsl(0, 0%, 95%);
-  --SWD-text-color-opacity: hsla(0, 0%, 100%, 0.87);
+  --SWD-text-color-opacity: hsla(0, 0%, 100%, 0.5);
+  --SWD-input-color-opacity: hsla(0, 0%, 100%, 0.87);
   --SWD-button-text-color: hsl(195, 100%, 2%);
   --SWD-line-height: 1.5;
 
