@@ -1,28 +1,27 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 import SWDscorepad from './components/SWDscorepad/SWDscorepad'
-import SWDtabs from './components/SWDtabs/SWDtabs';
+import SWDtabs from './components/SWDtabs/SWDtabs'
 
-//import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+//import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-const player1 = 'Marian';
-const player2 = 'Dinael';
-const agora = true;
-const pantheon = true;
+const player1 = 'Marian'
+const player2 = 'Dinael'
+const agora = true
+const pantheon = true
 
 function App() {
   const playerOne = player1.trim() === "" ? 'Ludio I' : player1
   const playerTwo = player2.trim() === "" ? 'Ludio II' : player2
 
-  const [total1, setTotal1] = useState(0);
-  const [total2, setTotal2] = useState(0);
+  const [total1, setTotal1] = useState<number>(0)
+  const [total2, setTotal2] = useState<number>(0)
 
-  // Funciones para actualizar los totales desde los hijos
-  const updateTotal1 = (newTotal) => {
+  const updateTotal1 = (newTotal: number) => {
     setTotal1(newTotal);
   };
 
-  const updateTotal2 = (newTotal) => {
+  const updateTotal2 = (newTotal: number) => {
     setTotal2(newTotal);
   };
 

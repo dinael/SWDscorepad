@@ -1,17 +1,17 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC } from "react"
 
-import { Input } from "./SWDinput-styles";
+import { Input } from "./SWDinput-styles"
 
 export type SWDInputProps = {
-  id: string;
-  label: string;
-  type?: string;
-  value?: string;
-  placeholder?: string;
-  maxLength?: number;
-  image?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
+  id: string
+  label: string
+  type?: string
+  value?: string
+  placeholder?: string
+  maxLength?: number
+  image?: string
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+}
 export const SWDInput: FC<SWDInputProps> = ({
   id,
   label,
@@ -24,10 +24,10 @@ export const SWDInput: FC<SWDInputProps> = ({
   ...props
 }: SWDInputProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.value.length <= maxLength && onChange(e);
-  };
+    e.target.value.length <= maxLength && onChange(e)
+  }
 
-  const pattern = type === "number" ? "\\d*" : undefined;
+  const pattern = type === "number" ? "\\d*" : undefined
 
   return (
     <Input.Wrapper
@@ -51,11 +51,11 @@ export const SWDInput: FC<SWDInputProps> = ({
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
-        maxlength={maxLength}
+        maxLength={maxLength}
         aria-describedby={`label-${id}`}
       />
     </Input.Wrapper>
-  );
-};
+  )
+}
 
-export default SWDInput;
+export default SWDInput

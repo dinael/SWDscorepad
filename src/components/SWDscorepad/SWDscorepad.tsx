@@ -1,15 +1,15 @@
-import { useState, ChangeEvent, FC, useEffect } from 'react';
-import { initialInputs, agoraInputs, pantheonInputs } from '../../data/inputValues';
+import { useState, ChangeEvent, FC, useEffect } from 'react'
+import { initialInputs, agoraInputs, pantheonInputs } from '../../data/inputValues'
 
-import SWDInput from '../SWDinput/SWDInput';
-import SWDvictories from '../SWDvictories/SWDvictories';
+import SWDInput from '../SWDinput/SWDInput'
+import SWDvictories from '../SWDvictories/SWDvictories'
 
 export type SWDscorepadProps = {
-  name: string;
-  showAgora?: boolean;
-  showPantheon?: boolean;
-  onUpdateTotal: (total: number) => void;
-};
+  name: string
+  showAgora?: boolean
+  showPantheon?: boolean
+  onUpdateTotal: (total: number) => void
+}
 
 export const SWDscorepad: FC<SWDscorepadProps> = ({
   name,
@@ -18,52 +18,52 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
   onUpdateTotal,
 }: SWDscorepadProps) => {
   const [inputValues, setInputValues] = useState<{ [id: string]: string }>(() => {
-    const initialInputValues: { [id: string]: string } = {};
+    const initialInputValues: { [id: string]: string } = {}
     for (const input of initialInputs) {
-      initialInputValues[input.id] = input.value || '';
+      initialInputValues[input.id] = input.value || ''
     }
     for (const input of agoraInputs) {
-      initialInputValues[input.id] = input.value || '';
+      initialInputValues[input.id] = input.value || ''
     }
     for (const input of pantheonInputs) {
-      initialInputValues[input.id] = input.value || '';
+      initialInputValues[input.id] = input.value || ''
     }
-    return initialInputValues;
-  });
+    return initialInputValues
+  })
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>, id: string) => {
-    const newValue = event.target.value;
+    const newValue = event.target.value
     setInputValues((prevInputValues) => ({
       ...prevInputValues,
       [id]: newValue
-    }));
-  };
+    }))
+  }
 
   const calculateTotal = () => {
-    let total = 0;
+    let total = 0
     for (const input of initialInputs) {
       if (inputValues[input.id] !== '') {
-        total += parseFloat(inputValues[input.id]) || 0;
+        total += parseFloat(inputValues[input.id]) || 0
       }
     }
     for (const input of agoraInputs) {
       if (inputValues[input.id] !== '') {
-        total += parseFloat(inputValues[input.id]) || 0;
+        total += parseFloat(inputValues[input.id]) || 0
       }
     }
     for (const input of pantheonInputs) {
       if (inputValues[input.id] !== '') {
-        total += parseFloat(inputValues[input.id]) || 0;
+        total += parseFloat(inputValues[input.id]) || 0
       }
     }
-    return total;
-  };
+    return total
+  }
 
-  const total = calculateTotal();
+  const total = calculateTotal()
 
   useEffect(() => {
-    onUpdateTotal(total);
-  }, [total, onUpdateTotal]);
+    onUpdateTotal(total)
+  }, [total, onUpdateTotal])
 
   return (
     <>
@@ -119,7 +119,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
         <SWDvictories showAgora={showAgora}></SWDvictories>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default SWDscorepad;
+export default SWDscorepad
