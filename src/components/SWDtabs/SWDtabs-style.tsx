@@ -7,12 +7,15 @@ export const Tabs = {
   `,
 
   Bar: styled.div`
+    position: sticky;
+    inset-block-start: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     margin-block-end: 2rem;
     border-block-end: max(0.0625rem, 1px) solid var(--SWD-color-primary);
+    background: var(--SWD-background-color)
   `,
 
   Control: styled.button`

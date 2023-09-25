@@ -1,43 +1,48 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC } from "react"
 
-import { Input } from "./SWDinput-styles";
+import { Input } from "./SWDinput-styles"
 
 export type SWDInputProps = {
-  id: string;
-  label: string;
-  type?: string;
-  value?: string;
-  placeholder?: string;
-  maxLength?: number;
-  image?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
+  id: string
+  label: string
+  type?: string
+  value?: string
+  placeholder?: string
+  maxLength?: number
+  image?: string
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+}
 export const SWDInput: FC<SWDInputProps> = ({
   id,
   label,
   type = "text",
   value,
   placeholder,
-  maxLength = 3,
+  maxLength = 2,
   image,
   onChange,
   ...props
 }: SWDInputProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange(e);
-  };
+    e.target.value.length <= maxLength && onChange(e)
+  }
 
-  const pattern = type === "number" ? "\\d*" : undefined;
+  const pattern = type === "number" ? "\\d*" : undefined
 
   return (
-    <Input.Wrapper htmlFor={id} {...props}>
+    <Input.Wrapper
+      htmlFor={id}
+      {...props}>
       {image && (
         <Input.ImageWrapper>
-          <Input.Image src={image} alt={label} aria-hidden="true" />
+          <Input.Image
+            src={image}
+            alt={label}
+            aria-hidden="true" />
         </Input.ImageWrapper>
       )}
-      <Input.LabelText id={`label-${id}`} hasImage={!!image}>
-        {label}:
+      <Input.LabelText id={`label-${id}`}>
+        {label}
       </Input.LabelText>
       <Input.Field
         type={type}
@@ -50,7 +55,7 @@ export const SWDInput: FC<SWDInputProps> = ({
         aria-describedby={`label-${id}`}
       />
     </Input.Wrapper>
-  );
-};
+  )
+}
 
-export default SWDInput;
+export default SWDInput

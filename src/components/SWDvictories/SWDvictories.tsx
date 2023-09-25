@@ -11,12 +11,15 @@ const Victory = {
   `,
   Btn: styled.button`
     appearance: none;
+    font-family: var(--SWD-title-font-family);
+    font-size: 1rem;
+    font-weight: 800;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    border: max(1px, 1px) solid var(--SWD-color-primary);
+    border: max(0.25rem, 4px) solid var(--SWD-color-primary);
     border-radius: max(0.5rem, 8px);
     cursor: pointer;
     transition: color .35s ease-in-out, background .35s ease-in-out;
@@ -47,11 +50,11 @@ const Progress = styled(Victory.Btn)`
 `
 
 const Political = styled(Victory.Btn)`
-  color: hsl(0, 0%, 0%);
-  background: rgb(244, 244, 244);
+  color: var(--SWD-button-text-color);
+  background: hsl(0, 0%, 80%);
 
   &:hover {
-    color: rgb(244, 244, 244);
+    color: hsl(0, 0%, 80%);
   }
 `
 
