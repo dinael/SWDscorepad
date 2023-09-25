@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FC, useEffect } from 'react'
 import { initialInputs, agoraInputs, pantheonInputs } from '../../data/inputValues'
 
-import SWDInput from '../SWDinput/SWDinput'
+import SWDinput from '../SWDinput/SWDinput'
 import SWDvictories from '../SWDvictories/SWDvictories'
 
 export type SWDscorepadProps = {
@@ -71,7 +71,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', margin: '0 auto' }}>
         <h2 style={{ display: 'none' }}>{name}</h2>
         {initialInputs.map((input) => (
-          <SWDInput
+          <SWDinput
             key={input.id}
             label={input.label}
             type="number"
@@ -86,7 +86,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
           <>
             <p>Agora</p>
             {agoraInputs.map((input) => (
-              <SWDInput
+              <SWDinput
                 key={input.id}
                 label={input.label}
                 type="number"
@@ -103,7 +103,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
           <>
             <p>Pantheon</p>
             {pantheonInputs.map((input) => (
-              <SWDInput
+              <SWDinput
                 key={input.id}
                 label={input.label}
                 type="number"
