@@ -20,14 +20,15 @@ export const Tabs = {
 
   Control: styled.button`
     appearance: none;
+    position: relative;
     font-family: var(--SWD-title-font-family);
     font-size: 2rem;
     display: block;
     text-align: center;
     flex: 1 1 100%;
-    max-inline-size: calc(100% - 2rem);
+    max-inline-size: 20rem;
     block-size: 4rem;
-    color: var(--SWD-color-primary);
+    color: var(--SWD-text-color-opacity);
     background: none;
     border: none;
     cursor: pointer;
@@ -38,8 +39,23 @@ export const Tabs = {
     padding: 0 1rem;
 
     &.active {
+      color: var(--SWD-color-primary);
       border-block-end: max(0.25rem, 4px) solid var(--SWD-color-primary);
     }
+  `,
+
+  Total: styled.span`
+    position: absolute;
+    inset-inline-end: 0.5rem;
+    inset-block-start: 0.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: 16rem;
+    background: var(--SWD-background-color);
   `,
 
   Container: styled.article`

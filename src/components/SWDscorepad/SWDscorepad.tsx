@@ -2,7 +2,6 @@ import { useState, ChangeEvent, FC, useEffect } from 'react'
 import { initialInputs, agoraInputs, pantheonInputs } from '../../data/inputValues'
 
 import SWDinput from '../SWDinput/SWDinput'
-import SWDvictories from '../SWDvictories/SWDvictories'
 
 export type SWDscorepadProps = {
   name: string
@@ -116,8 +115,8 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
             ))}
           </>
         )}
-        <output>Total: {total}</output>
-        <SWDvictories showAgora={showAgora}></SWDvictories>
+        <output style={{ display: 'none' }} aria-hidden="true">Total: {total}</output>
+
       </div>
     </>
   )

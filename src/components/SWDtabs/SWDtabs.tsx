@@ -26,13 +26,17 @@ export const SWDtabs: FC<SWDtabsProps> = ({
           className={activeTab === tabName1 ? 'active' : ''}
           onClick={() => setActiveTab(tabName1)}>
           {tabName1}
-          {total1 > 0 ? total1 : ''}
+          <Tabs.Total>
+            {total1 > 0 ? total1 : ''}
+          </Tabs.Total>
         </Tabs.Control>
         <Tabs.Control
           className={activeTab === tabName2 ? 'active' : ''}
           onClick={() => setActiveTab(tabName2)}>
           {tabName2}
-          {total2 > 0 ? total2 : ''}
+          <Tabs.Total>
+            {total2 > 0 ? total2 : ''}
+          </Tabs.Total>
         </Tabs.Control>
       </Tabs.Bar>
       <Tabs.Container className="tab-content">

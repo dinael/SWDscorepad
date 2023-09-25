@@ -1,7 +1,8 @@
 import { useState } from 'react'
 
-import SWDscorepad from './components/SWDscorepad/SWDscorepad'
 import SWDtabs from './components/SWDtabs/SWDtabs'
+import SWDscorepad from './components/SWDscorepad/SWDscorepad'
+import SWDvictories from './components/SWDvictories/SWDvictories'
 
 //import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
@@ -28,7 +29,7 @@ function App() {
   return (
     <>
       <header>header</header>
-      <main style={{ display: 'grid', gap: '4rem', margin: '0 auto', maxInlineSize: '35rem' }}>
+      <main style={{ display: 'grid', margin: '0 auto', maxInlineSize: '35rem' }}>
         <SWDtabs
           tabName1={playerOne}
           tabName2={playerTwo}
@@ -38,13 +39,24 @@ function App() {
             name={playerOne}
             showAgora={agora}
             showPantheon={pantheon}
-            onUpdateTotal={updateTotal1}/>
+            onUpdateTotal={updateTotal1} />
           <SWDscorepad
             name={playerTwo}
             showAgora={agora}
             showPantheon={pantheon}
-            onUpdateTotal={updateTotal2}/>
+            onUpdateTotal={updateTotal2} />
         </SWDtabs>
+        <dl>
+          <div>
+            <dt>Ludio I</dt>
+            <dd>{total1}</dd>
+          </div>
+          <div>
+            <dt>Ludio II</dt>
+            <dd>{total2}</dd>
+          </div>
+        </dl>
+        <SWDvictories showAgora={agora}></SWDvictories>
       </main>
       <footer>
         Footer

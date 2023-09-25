@@ -38,6 +38,7 @@ export const Input = {
     height: auto;
   `,
   Field: styled.input`
+    font-family: var(--SWD-title-font-family);
     font-size: 1.5rem;
     text-align: end;
     display: flex;
@@ -50,9 +51,9 @@ export const Input = {
     block-size: 2.75rem;
     padding-inline: 1rem;
     border-radius: max(0.25rem, 4px);
-    border: max(0.125rem, 2px) solid var(--SWD-text-color-opacity);
+    border: max(0.125rem, 2px) solid var(--SWD-input-color-opacity);
     color: #000;
-    background: var(--SWD-text-color-opacity);
+    background: var(--SWD-input-color-opacity);
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
