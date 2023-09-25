@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Input = {
   Wrapper: styled.label`
@@ -8,24 +8,16 @@ export const Input = {
     gap: 1.5rem;
     inline-size: 100%;
   `,
-  LabelText: styled.span<{ hasImage?: boolean }>`
-    ${(props) => props.hasImage
-      ? css`
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          padding: 0;
-          margin: -1px;
-          overflow: hidden;
-          clip: rect(0, 0, 0, 0);
-          border: 0;
-        `
-      : css`
-          font-size: 1.25rem;
-          padding-inline-end: 1rem;
-    `};
+  LabelText: styled.span`
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
   `,
-
   ImageWrapper: styled.span`
     display: flex;
     flex: 1 0 auto;
@@ -46,9 +38,10 @@ export const Input = {
     height: auto;
   `,
   Field: styled.input`
+    font-size: 1.5rem;
+    text-align: end;
     display: flex;
     flex: 1 1 100%;
-    font-size: 1.5rem;
     inline-size: calc(100% - 2.75rem);
     font-weight: 800;
     appearance: none;
