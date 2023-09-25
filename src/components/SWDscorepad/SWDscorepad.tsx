@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FC, useEffect } from 'react'
 import { initialInputs, agoraInputs, pantheonInputs } from '../../data/inputValues'
 
-import SWDInput from '../SWDinput/SWDInput'
+import SWDInput from '../SWDinput/SWDinput'
 import SWDvictories from '../SWDvictories/SWDvictories'
 
 export type SWDscorepadProps = {
