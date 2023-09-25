@@ -2,7 +2,7 @@ import { ChangeEvent, FC } from "react"
 
 import { Input } from "./SWDinput-styles"
 
-export type SWDInputProps = {
+export type SWDinputProps = {
   id: string
   label: string
   type?: string
@@ -12,7 +12,7 @@ export type SWDInputProps = {
   image?: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
-export const SWDInput: FC<SWDInputProps> = ({
+export const SWDinput: FC<SWDinputProps> = ({
   id,
   label,
   type = "text",
@@ -22,7 +22,7 @@ export const SWDInput: FC<SWDInputProps> = ({
   image,
   onChange,
   ...props
-}: SWDInputProps) => {
+}: SWDinputProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.target.value.length <= maxLength && onChange(e)
   }
@@ -58,4 +58,4 @@ export const SWDInput: FC<SWDInputProps> = ({
   )
 }
 
-export default SWDInput
+export default SWDinput
