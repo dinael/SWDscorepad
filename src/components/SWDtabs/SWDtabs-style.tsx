@@ -39,6 +39,9 @@ export const Tabs = {
     padding: 0 1rem;
 
     &.active {
+      --total-background: var(--SWD-color-primary);
+      --total-scale: 1;
+
       color: var(--SWD-color-primary);
       border-block-end: max(0.25rem, 4px) solid var(--SWD-color-primary);
     }
@@ -51,11 +54,19 @@ export const Tabs = {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.25rem;
+    font-size: 1rem;
     inline-size: 2rem;
     block-size: 2rem;
     border-radius: 16rem;
-    background: var(--SWD-background-color);
+    border: max(0.25rem, 4px) solid var(--SWD-background-color);
+    color: var(--SWD-background-color);
+    background: var(--total-background, var(--SWD-text-color));
+    transform: scale(var(--total-scale, 0.75));
+    transition: transform .25s ease-in-out;
+
+    :empty {
+      display: none;
+    }
   `,
 
   Container: styled.article`

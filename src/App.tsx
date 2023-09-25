@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import SWDheader from './components/SWDheader/SWDheader'
+import SWDfooter from './components/SWDfooter/SWDfooter'
 import SWDtabs from './components/SWDtabs/SWDtabs'
 import SWDscorepad from './components/SWDscorepad/SWDscorepad'
 import SWDvictories from './components/SWDvictories/SWDvictories'
@@ -28,7 +30,7 @@ function App() {
 
   return (
     <>
-      <header>header</header>
+      <SWDheader />
       <main style={{ display: 'grid', margin: '0 auto', maxInlineSize: '35rem' }}>
         <SWDtabs
           tabName1={playerOne}
@@ -46,21 +48,10 @@ function App() {
             showPantheon={pantheon}
             onUpdateTotal={updateTotal2} />
         </SWDtabs>
-        <dl>
-          <div>
-            <dt>Ludio I</dt>
-            <dd>{total1}</dd>
-          </div>
-          <div>
-            <dt>Ludio II</dt>
-            <dd>{total2}</dd>
-          </div>
-        </dl>
         <SWDvictories showAgora={agora}></SWDvictories>
+        <button>Calculate</button>
       </main>
-      <footer>
-        Footer
-      </footer>
+      <SWDfooter />
     </>
   )
 }
