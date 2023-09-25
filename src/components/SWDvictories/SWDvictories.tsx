@@ -8,6 +8,8 @@ const Victory = {
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
+    padding-inline: 1rem;
+    padding-block: 2rem 1rem;
   `,
   Btn: styled.button`
     appearance: none;
@@ -18,7 +20,7 @@ const Victory = {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 0.5rem;
     border: none;
     border-radius: max(0.5rem, 8px);
     cursor: pointer;

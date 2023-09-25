@@ -24,7 +24,16 @@ export const SWDinput: FC<SWDinputProps> = ({
   ...props
 }: SWDinputProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.target.value.length <= maxLength && onChange(e)
+    const newValue = e.target.value
+    if (type === "number") {
+      if (/^[+]?\d+$/.test(newValue) || newValue === "") {
+        if (newValue.length <= maxLength) {
+          onChange(e)
+        }
+      }
+    } else {
+      onChange(e)
+    }
   }
 
   const pattern = type === "number" ? "\\d*" : undefined
@@ -48,6 +57,8 @@ export const SWDinput: FC<SWDinputProps> = ({
         type={type}
         pattern={pattern}
         id={id}
+        step="any"
+        min={type === "number" ? 0 : undefined}
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
