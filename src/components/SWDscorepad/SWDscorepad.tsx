@@ -30,7 +30,8 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
     }
     return initialInputValues
   })
-
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const handleChange = (event: ChangeEvent<HTMLInputElement>, id: string) => {
     const newValue = event.target.value
     setInputValues((prevInputValues) => ({
