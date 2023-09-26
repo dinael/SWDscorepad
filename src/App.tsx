@@ -19,6 +19,8 @@ function App() {
 
   const [total1, setTotal1] = useState<number>(0)
   const [total2, setTotal2] = useState<number>(0)
+  const [winner, setWinner] = useState<string | null>(null);
+  const [victory, setVictory] = useState<string | null>(null);
 
   const updateTotal1 = (newTotal: number) => {
     setTotal1(newTotal);
@@ -28,10 +30,22 @@ function App() {
     setTotal2(newTotal);
   };
 
+  const winnerIsActive = total1 === 0 && total2 === 0 ? true : false
+
+  const handleCalculateClick = () => {
+    if (total1 === 0 && total2 === 0) {
+      setWinner(null);
+    } else {
+      const winner = total1 > total2 ? playerOne : total2 > total1 ? playerTwo : 'Empate';
+      setWinner(winner);
+    }
+  };
+
   return (
     <>
       <SWDheader />
       <main style={{ display: 'grid', margin: '0 auto', maxInlineSize: '35rem' }}>
+        {winner && <p>El ganador es: {winner}</p>}
         <SWDtabs
           tabName1={playerOne}
           tabName2={playerTwo}
@@ -49,7 +63,12 @@ function App() {
             onUpdateTotal={updateTotal2} />
         </SWDtabs>
         <SWDvictories showAgora={agora}></SWDvictories>
-        <button>Calculate</button>
+        <button
+          disabled={winnerIsActive}
+          id="calculate"
+          onClick={handleCalculateClick}>
+          Calcular
+        </button>
       </main>
       <SWDfooter />
     </>
