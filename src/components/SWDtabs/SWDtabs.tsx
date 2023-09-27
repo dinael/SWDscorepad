@@ -1,6 +1,6 @@
 import { ReactNode, useState, FC, Children, CSSProperties } from 'react'
 
-import { Tabs } from './SWDtabs-style'
+import './SWDtabs.scss'
 
 export type SWDtabsProps = {
   tabName1: string
@@ -20,31 +20,40 @@ export const SWDtabs: FC<SWDtabsProps> = ({
 }: SWDtabsProps) => {
   const [activeTab, setActiveTab] = useState(tabName1)
 
+  const statusTabs1 = activeTab === tabName1 ? 'active' : ''
+  const statusTabs2 = activeTab === tabName2 ? 'active' : ''
+
   return (
-    <Tabs.Wrapper {...props}>
-      <Tabs.Bar className="tabs">
-        <Tabs.Control
-          className={activeTab === tabName1 ? 'active' : ''}
+    <div className='tabs-wrapper' {...props}>
+      <div className="tabs-bar">
+        <button
+          className={`tabs-control ${statusTabs1}`}
+          type='button'
           onClick={() => setActiveTab(tabName1)}>
           {tabName1}
           {total1 > 0 &&
-            <Tabs.Total aria-label={`VP total de ${tabName1}:`}>
+            <span
+              className='total'
+              aria-label={`VP total de ${tabName1}:`}>
               {total1 > 0 ? total1 : null}
-            </Tabs.Total>
+            </span>
           }
-        </Tabs.Control>
-        <Tabs.Control
-          className={activeTab === tabName2 ? 'active' : ''}
+        </button>
+        <button
+          className={`tabs-control ${statusTabs2}`}
+          type='button'
           onClick={() => setActiveTab(tabName2)}>
           {tabName2}
           {total2 > 0 &&
-            <Tabs.Total aria-label={`VP total de ${tabName2}:`}>
+            <span
+              className='total'
+              aria-label={`VP total de ${tabName1}:`}>
               {total2 > 0 ? total2 : null}
-            </Tabs.Total>
+            </span>
           }
-        </Tabs.Control>
-      </Tabs.Bar>
-      <Tabs.Container className="tab-content">
+        </button>
+      </div>
+      <article className="tabs-container">
         {Children.map(children, (child, index) => {
           const isActive = activeTab === (index === 0 ? tabName1 : tabName2)
           const tabStyle: CSSProperties = {
@@ -56,8 +65,8 @@ export const SWDtabs: FC<SWDtabsProps> = ({
             </div>
           )
         })}
-      </Tabs.Container>
-    </Tabs.Wrapper>
+      </article>
+    </div>
   )
 }
 
