@@ -8,6 +8,7 @@ export type SWDtabsProps = {
   total1: number
   total2: number
   children: ReactNode
+  onTabChange: (activeTab: string) => void
 }
 
 export const SWDtabs: FC<SWDtabsProps> = ({
@@ -16,6 +17,7 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   total1,
   total2,
   children,
+  onTabChange,
   ...props
 }: SWDtabsProps) => {
   const [activeTab, setActiveTab] = useState(tabName1)
@@ -29,7 +31,10 @@ export const SWDtabs: FC<SWDtabsProps> = ({
         <button
           className={`tabs-control ${statusTabs1}`}
           type='button'
-          onClick={() => setActiveTab(tabName1)}>
+          onClick={() => {
+            setActiveTab(tabName1)
+            onTabChange(tabName1)
+          }}>
           {tabName1}
           {total1 > 0 &&
             <span
@@ -42,7 +47,10 @@ export const SWDtabs: FC<SWDtabsProps> = ({
         <button
           className={`tabs-control ${statusTabs2}`}
           type='button'
-          onClick={() => setActiveTab(tabName2)}>
+          onClick={() => {
+            setActiveTab(tabName2)
+            onTabChange(tabName2)
+          }}>
           {tabName2}
           {total2 > 0 &&
             <span

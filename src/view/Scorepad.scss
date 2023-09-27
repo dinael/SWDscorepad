@@ -4,7 +4,10 @@
   padding-block: 1rem;
   background: var(--SWD-background-color);
 
-  &-winner {}
+  &-winner {
+    color: var(--SWD-button-text-color);
+    background: var(--SWD-text-color);
+  }
 
   &-btn {
     appearance: none;
