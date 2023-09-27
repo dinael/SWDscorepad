@@ -10,6 +10,7 @@ export type SWDinputProps = {
   placeholder?: string
   maxLength?: number
   image?: string
+  readOnly?: boolean
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 export const SWDinput: FC<SWDinputProps> = ({
@@ -20,6 +21,7 @@ export const SWDinput: FC<SWDinputProps> = ({
   placeholder,
   maxLength = 2,
   image,
+  readOnly = false,
   onChange,
   ...props
 }: SWDinputProps) => {
@@ -68,6 +70,7 @@ export const SWDinput: FC<SWDinputProps> = ({
         placeholder={placeholder}
         maxLength={maxLength}
         aria-describedby={`label-${id}`}
+        disabled={readOnly}
       />
     </label>
   )

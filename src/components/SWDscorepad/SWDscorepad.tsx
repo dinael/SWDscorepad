@@ -7,6 +7,7 @@ export type SWDscorepadProps = {
   name: string
   showAgora?: boolean
   showPantheon?: boolean
+  readOnly?: boolean
   onUpdateTotal: (total: number) => void
 }
 
@@ -14,6 +15,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
   name,
   showAgora = false,
   showPantheon = false,
+  readOnly,
   onUpdateTotal,
 }: SWDscorepadProps) => {
   const [inputValues, setInputValues] = useState<{ [id: string]: string }>(() => {
@@ -78,6 +80,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
             value={inputValues[input.id]}
             image={input.image}
             placeholder={input.placeholder}
+            readOnly={readOnly}
           />
         ))}
         {showAgora && (
@@ -93,6 +96,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
                 value={inputValues[input.id]}
                 image={input.image}
                 placeholder={input.placeholder}
+                readOnly={readOnly}
               />
             ))}
           </>
@@ -110,6 +114,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
                 value={inputValues[input.id]}
                 image={input.image}
                 placeholder={input.placeholder}
+                readOnly={readOnly}
               />
             ))}
           </>

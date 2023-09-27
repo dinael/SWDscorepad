@@ -53,9 +53,9 @@
   block-size: 2.75rem;
   padding-inline: 1rem;
   border-radius: max(0.25rem, 4px);
-  border: max(0.125rem, 2px) solid var(--SWD-input-color-opacity);
+  border: max(0.125rem, 2px) solid var(--input-field-border-color, var(--SWD-input-color-opacity));
   color: #000;
-  background: var(--SWD-input-color-opacity);
+  background: var(--input-field-background, var(--SWD-input-color-opacity));
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
@@ -73,9 +73,19 @@
     outline-offset: max(0.25rem, 4px);
   }
 
+  &::placeholder,
+  &::-ms-input-placeholder {
+    color: var(--input-field-placeholder-color, var(--SWD-text-color-opacity));
+  }
+
   &:not(:placeholder-shown) {
     background: none;
     color: var(--SWD-color-primary);
     border-color: transparent;
+  }
+
+  &:read-only {
+    --input-field-border-color: transparent;
+    --input-field-background: none;
   }
 }
