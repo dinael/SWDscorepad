@@ -29,8 +29,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
     }
     return initialInputValues
   })
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>, id: string) => {
     const newValue = event.target.value
     setInputValues((prevInputValues) => ({
@@ -116,7 +115,6 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
           </>
         )}
         <output style={{ display: 'none' }} aria-hidden="true">Total: {total}</output>
-
       </div>
     </>
   )

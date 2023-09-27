@@ -62,10 +62,10 @@ export const Tabs = {
     color: var(--SWD-background-color);
     background: var(--total-background, var(--SWD-text-color));
     transform: scale(var(--total-scale, 0.75));
-    transition: transform .25s ease-in-out;
+    transition: all .25s ease-in-out;
 
     :empty {
-      display: none;
+      --total-scale: 0;
     }
   `,
 
