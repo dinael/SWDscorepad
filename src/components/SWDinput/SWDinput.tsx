@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from "react"
 
-import { Input } from "./SWDinput-styles"
+import './SWDinput.scss'
 
 export type SWDinputProps = {
   id: string
@@ -39,21 +39,25 @@ export const SWDinput: FC<SWDinputProps> = ({
   const pattern = type === "number" ? "\\d*" : undefined
 
   return (
-    <Input.Wrapper
+    <label className="input-wrapper"
       htmlFor={id}
       {...props}>
       {image && (
-        <Input.ImageWrapper>
-          <Input.Image
+        <span className="input-image-wrapper">
+          <img
+            className=""
             src={image}
             alt={label}
             aria-hidden="true" />
-        </Input.ImageWrapper>
+        </span>
       )}
-      <Input.LabelText id={`label-${id}`}>
+      <span
+        className="input-label-text"
+        id={`label-${id}`}>
         {label}
-      </Input.LabelText>
-      <Input.Field
+      </span>
+      <input
+        className="input-field"
         type={type}
         pattern={pattern}
         id={id}
@@ -65,7 +69,7 @@ export const SWDinput: FC<SWDinputProps> = ({
         maxLength={maxLength}
         aria-describedby={`label-${id}`}
       />
-    </Input.Wrapper>
+    </label>
   )
 }
 
