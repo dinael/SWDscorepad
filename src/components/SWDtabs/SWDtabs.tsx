@@ -24,7 +24,7 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   const statusTabs2 = activeTab === tabName2 ? 'active' : ''
 
   return (
-    <section className='tabs-wrapper' {...props}>
+    <div className='tabs-wrapper' {...props}>
       <div className="tabs-bar">
         <button
           className={`tabs-control ${statusTabs1}`}
@@ -66,7 +66,7 @@ export const SWDtabs: FC<SWDtabsProps> = ({
           )
         })}
       </article>
-    </section>
+    </div>
   )
 }
 

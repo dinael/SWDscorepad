@@ -1,5 +1,7 @@
 import { FC, useState } from 'react'
 
+import './Scorepad.scss'
+
 import SWDtabs from '../components/SWDtabs/SWDtabs'
 import SWDscorepad from '../components/SWDscorepad/SWDscorepad'
 import SWDvictories from '../components/SWDvictories/SWDvictories'
@@ -43,12 +45,17 @@ export const Scorepad: FC<ScorepadProps> = (
     }
   };
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
+  const btnStatus = !winner ? handleCalculateClick : reloadPage
+
   return (
-    <div
+    <section
       className="scorepad"
       style={{ display: 'grid', margin: '0 auto', maxInlineSize: '35rem' }}
       {...props}>
-      {winner && <p>El ganador es: {winner}</p>}
       <SWDtabs
         tabName1={playerOne}
         tabName2={playerTwo}
@@ -66,13 +73,17 @@ export const Scorepad: FC<ScorepadProps> = (
           onUpdateTotal={updateTotal2} />
       </SWDtabs>
       <SWDvictories showAgora={agora}></SWDvictories>
-      <button
-        disabled={winnerIsActive}
-        id="calculate"
-        onClick={handleCalculateClick}>
-        Calcular
-      </button>
-    </div>
+      <div className='calculate'>
+        {winner && <p className='calculate-winner'>El ganador es: {winner}</p>}
+        <button
+          className={`calculate-btn ${winner && 'replay'}`}
+          disabled={winnerIsActive}
+          id="calculate"
+          onClick={btnStatus}>
+          {winner ? 'Replay' : 'Calculate'}
+        </button>
+      </div>
+    </section>
   )
 };
 
