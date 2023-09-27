@@ -1,27 +1,18 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 // import Home from '../view/Home'
-// import Podcast from '../view/Podcast'
-// import Episode from '../view/Episode'
+import Scorepad from '../view/Scorepad'
 // import NotFound from '../view/NotFound'
 
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Scorepad />,
   },
-  {
-    path: "/podcast/:podcastId",
-    element: <Podcast />,
-  },
-  {
-    path: "/podcast/:podcastId/episode/:trackId/",
-    element: <Episode />,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
-  }
+  // {
+  //   path: "*",
+  //   element: <NotFound />,
+  // }
 
 ]);
 

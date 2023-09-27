@@ -61,25 +61,25 @@ const Political = styled(Victory.Btn)`
 
 type SWDvictoriesProps = {
   showAgora: boolean;
-  onVictory?: (type: string) => void; // Agregamos la prop onVictory
+  onVictory?: (type: string) => void
 };
 
 const SWDvictories: FC<SWDvictoriesProps> = ({
   showAgora = false,
-  onVictory, // Usamos la prop onVictory
+  onVictory,
 }: SWDvictoriesProps) => {
   return (
     <Victory.Bar>
-      <Military>
+      <Military onClick={() => onVictory && onVictory('Military')}>
         <Victory.Img src={vp} alt="" aria-hidden="true" />
         <Victory.Label>Military</Victory.Label>
       </Military>
-      <Progress>
+      <Progress onClick={() => onVictory && onVictory('Progress')}>
         <Victory.Img src={vp} alt="" aria-hidden="true" />
         <Victory.Label>Progress</Victory.Label>
       </Progress>
       {showAgora && (
-        <Political onClick={() => onVictory('Political')}>
+        <Political onClick={() => onVictory && onVictory('Political')}>
           <Victory.Img src={vp} alt="" aria-hidden="true" />
           <Victory.Label>Political</Victory.Label>
         </Political>

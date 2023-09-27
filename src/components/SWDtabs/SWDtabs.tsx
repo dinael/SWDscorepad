@@ -16,11 +16,12 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   total1,
   total2,
   children,
+  ...props
 }: SWDtabsProps) => {
   const [activeTab, setActiveTab] = useState(tabName1)
 
   return (
-    <Tabs.Wrapper>
+    <Tabs.Wrapper {...props}>
       <Tabs.Bar className="tabs">
         <Tabs.Control
           className={activeTab === tabName1 ? 'active' : ''}
