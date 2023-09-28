@@ -27,6 +27,19 @@
   &:hover {
     --victory-btn-background: rgba(255, 255, 255, 0.1);
   }
+
+  &:disabled {
+    --victory-btn-color: var(--SWD-button-text-color);
+
+    cursor: default;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.1);
+
+    .victory-symbol {
+      filter: grayscale(1);
+      opacity: 0.5;
+    }
+  }
 }
 
 .victory-label {

@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 
 import './Scorepad.scss'
-
+import VP2 from '../assets/images/vp-2.svg'
 import SWDtabs from '../components/SWDtabs/SWDtabs'
 import SWDscorepad from '../components/SWDscorepad/SWDscorepad'
 import SWDvictories from '../components/SWDvictories/SWDvictories'
@@ -49,7 +49,7 @@ export const Scorepad: FC<ScorepadProps> = (
       return
     }
 
-    const message = `Victoria de ${type} para ${tabActive}`
+    const message = `${type} victory to ${tabActive}`
     setVictoryMessages({ ...victoryMessages, [type]: message })
     setActiveVictoryType(type)
     setWinner(tabActive)
@@ -70,6 +70,8 @@ export const Scorepad: FC<ScorepadProps> = (
 
   const inputReadOnly = winner ? true : false
 
+  const victoryDisabled = winner || activeVictoryType ? true : false;
+
   const btnDisabled = total1 === 0 && total2 === 0 && !activeVictoryType
   const btnStatus = winner ? reloadPage : handleCalculateClick
 
@@ -83,8 +85,7 @@ export const Scorepad: FC<ScorepadProps> = (
         tabName2={playerTwo}
         total1={total1}
         total2={total2}
-        onTabChange={handleTabChange}
-      >
+        onTabChange={handleTabChange}>
         <SWDscorepad
           name={playerOne}
           showAgora={agora}
@@ -100,15 +101,21 @@ export const Scorepad: FC<ScorepadProps> = (
       </SWDtabs>
       <SWDvictories
         showAgora={agora}
+        disabled={victoryDisabled}
         onMilitaryVictory={() => handleVictory('military')}
         onProgressVictory={() => handleVictory('progress')}
-        onPoliticalVictory={() => handleVictory('political')}
-      ></SWDvictories>
+        onPoliticalVictory={() => handleVictory('political')} />
       <div className='calculate'>
-        {activeVictoryType && <p>{victoryMessages[activeVictoryType]}</p>}
+        {activeVictoryType &&
+          <p className='calculate-winner'>
+            <img className='victory-symbol' src={VP2} alt="" aria-hidden="true" />
+            {victoryMessages[activeVictoryType]}
+          </p>
+        }
         {winner && !activeVictoryType &&
           <p className='calculate-winner'>
-            El ganador es: {winner}
+            <img className='victory-symbol' src={VP2} alt="" aria-hidden="true" />
+            The winner is {winner}
           </p>
         }
         <button

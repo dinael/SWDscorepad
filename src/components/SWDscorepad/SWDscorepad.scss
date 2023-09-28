@@ -1,0 +1,10 @@
+.SWDscorepad {
+  display: grid;
+  gap: 1rem;
+  margin: 0 auto;
+  border: none;
+
+  &-subtitle {
+    font-family: var(--SWD-title-font-family);
+  }
+}
