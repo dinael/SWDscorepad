@@ -1,6 +1,8 @@
 import { useState, ChangeEvent, FC, useEffect } from 'react'
 import { initialInputs, agoraInputs, pantheonInputs } from '../../data/inputValues'
 
+import './SWDscorepad.scss'
+
 import SWDinput from '../SWDinput/SWDinput'
 
 export type SWDscorepadProps = {
@@ -68,8 +70,8 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
 
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', margin: '0 auto' }}>
-        <h2 style={{ display: 'none' }}>{name}</h2>
+      <fieldset className='SWDscorepad'>
+        <h2 className='SWDscorepad-player-name sr-only'>{name}'s scorepad</h2>
         {initialInputs.map((input) => (
           <SWDinput
             key={input.id}
@@ -85,7 +87,9 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
         ))}
         {showAgora && (
           <>
-            <p>Agora</p>
+            <p className='SWDscorepad-subtitle'>
+              Agora
+            </p>
             {agoraInputs.map((input) => (
               <SWDinput
                 key={input.id}
@@ -103,7 +107,9 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
         )}
         {showPantheon && (
           <>
-            <p>Pantheon</p>
+            <p className='SWDscorepad-subtitle'>
+              Pantheon
+            </p>
             {pantheonInputs.map((input) => (
               <SWDinput
                 key={input.id}
@@ -120,7 +126,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
           </>
         )}
         <output style={{ display: 'none' }} aria-hidden="true">Total: {total}</output>
-      </div>
+      </fieldset>
     </>
   )
 }

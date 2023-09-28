@@ -5,8 +5,20 @@
   background: var(--SWD-background-color);
 
   &-winner {
+    display: flex;
+    gap: 0.25rem;
+    text-transform: capitalize;
+    align-items: center;
+    justify-content: center;
+    padding-block: 0.5em;
+    border-radius: max(0.25rem, 4px);
     color: var(--SWD-button-text-color);
-    background: var(--SWD-text-color);
+    background: hsl(120, 100%, 80%);
+
+    img {
+      block-size: 1.5rem;
+      inline-size: 1.5rem;
+    }
   }
 
   &-btn {
