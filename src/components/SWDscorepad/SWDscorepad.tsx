@@ -3,7 +3,7 @@ import { initialInputs, agoraInputs, pantheonInputs } from '../../data/inputValu
 
 import './SWDscorepad.scss'
 
-import SWDinput from '../SWDinput/SWDinput'
+import SWDinput from '@/components/SWDinput/SWDinput'
 
 export type SWDscorepadProps = {
   name: string

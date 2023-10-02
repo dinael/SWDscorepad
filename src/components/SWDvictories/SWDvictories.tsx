@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import './SWDvictories.scss'
 
-import vp from '/src/assets/images/vp.svg'
+import vp from '@/assets/images/vp.svg'
 
 type SWDvictoriesProps = {
   showAgora?: boolean

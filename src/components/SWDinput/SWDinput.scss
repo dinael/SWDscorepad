@@ -1,20 +1,25 @@
 .input-wrapper {
   display: grid;
-  grid-template-columns: 3.5rem 1fr;
+  grid-template-columns: var(--input-wrapper-grid-template-columns, 3.5rem 1fr);
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--input-wrapper-gap, 1.5rem);
   inline-size: 100%;
+
+  &.vertical {
+    --input-wrapper-grid-template-columns: 1fr;
+    --input-wrapper-gap: 0;
+
+    .input-label-text {
+      padding-block-end: 0.25rem;
+    }
+  }
 }
 
+
+
 .input-label-text {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
+  font-size: var(--input-label-text-font-size, 1rem);
+  font-family: var(--input-label-text-font-family);
 }
 
 .input-image-wrapper {
@@ -42,7 +47,7 @@
 .input-field {
   font-family: var(--SWD-title-font-family);
   font-size: 1.5rem;
-  text-align: end;
+  text-align: var(--input-field-text-align, end);
   display: flex;
   flex: 1 1 100%;
   inline-size: calc(100% - 2.75rem);
@@ -53,9 +58,10 @@
   block-size: 2.75rem;
   padding-inline: 1rem;
   border-radius: max(0.25rem, 4px);
-  border: max(0.125rem, 2px) solid var(--input-field-border-color, var(--SWD-input-color-opacity));
+  border: max(0.0625rem, 1px) solid transparent;
+  border-block-end-color: var(--input-field-border-color, var(--SWD-input-color-opacity));
   color: #000;
-  background: var(--input-field-background, var(--SWD-input-color-opacity));
+  background: none; //var(--input-field-background, var(--SWD-input-color-opacity));
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
@@ -81,11 +87,11 @@
   &:not(:placeholder-shown) {
     background: none;
     color: var(--SWD-color-primary);
-    border-color: transparent;
+    border-block-end-color: var(--input-field-border-color);
   }
 
   &:read-only {
-    --input-field-border-color: transparent;
+    --input-field-border-color: var(--SWD-text-color-opacity);
     --input-field-background: none;
   }
 }

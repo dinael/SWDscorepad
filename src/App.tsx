@@ -1,7 +1,10 @@
 
 import Router from './router/Router'
-import SWDheader from './components/SWDheader/SWDheader'
-import SWDfooter from './components/SWDfooter/SWDfooter'
+
+import { GameProvider } from '@/providers/GameContext'
+
+import SWDheader from '@/components/SWDheader/SWDheader'
+import SWDfooter from '@/components/SWDfooter/SWDfooter'
 
 function App() {
 
@@ -9,7 +12,9 @@ function App() {
     <>
       <SWDheader />
       <main className="App">
-        <Router />
+        <GameProvider>
+          <Router />
+        </GameProvider>
       </main>
       <SWDfooter />
     </>

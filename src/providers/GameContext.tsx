@@ -1,74 +1,68 @@
-// import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react';
 
-// export type GameData = {
-//   player1: string
-//   player2: string
-//   showAgora: boolean
-//   showPantheon: boolean
-//   showSolo: boolean
-// }
+export type GameData = {
+  player1: string;
+  player2: string;
+  showAgora: boolean;
+  showPantheon: boolean;
+  showSolo: boolean;
+};
 
-// const GameContext = createContext<GameData | undefined>(undefined)
+type GameContextType = {
+  gameData: GameData;
+  updateGameConfig: (newConfig: GameData) => void;
+};
 
-// export function useGameContext() {
-//   const context = useContext(GameContext)
-//   if (!context) {
-//     throw new Error('useGameContext debe utilizarse dentro de GameProvider')
-//   }
-//   return context
-// }
+const GameContext = createContext<GameContextType | undefined>(undefined);
 
-// interface GameProviderProps {
-//   children: React.ReactNode
-// }
+export function useGameContext() {
+  const context = useContext(GameContext);
+  if (!context) {
+    throw new Error('useGameContext debe utilizarse dentro de GameProvider');
+  }
+  return context;
+}
 
-// export function GameProvider({ children }: GameProviderProps) {
-//   const [player1, setPlayer1] = useState('')
-//   const [player2, setPlayer2] = useState('')
-//   const [showAgora, setShowAgora] = useState(false)
-//   const [showPantheon, setShowPantheon] = useState(false)
-//   const [showSolo, setShowSolo] = useState(false)
+interface GameProviderProps {
+  children: React.ReactNode;
+}
 
-//   useEffect(() => {
-//     const storedPlayer1 = localStorage.getItem('player1')
-//     const storedPlayer2 = localStorage.getItem('player2')
+export function GameProvider({ children }: GameProviderProps) {
+  const [player1, setPlayer1] = useState('');
+  const [player2, setPlayer2] = useState('');
+  const [showAgora, setShowAgora] = useState(false);
+  const [showPantheon, setShowPantheon] = useState(false);
+  const [showSolo, setShowSolo] = useState(false);
 
-//     if (storedPlayer1 && storedPlayer2) {
-//       setPlayer1(storedPlayer1)
-//       setPlayer2(storedPlayer2)
-//     }
-//   }, [])
+  useEffect(() => {
+    const storedPlayer1 = localStorage.getItem('player1');
+    const storedPlayer2 = localStorage.getItem('player2');
 
-//   const handleConfigChange = (config: string) => {
-//     setShowAgora(config === 'agora')
-//     setShowPantheon(config === 'pantheon')
-//     setShowSolo(config === 'solo')
-//   }
+    if (storedPlayer1 && storedPlayer2) {
+      setPlayer1(storedPlayer1)
+      setPlayer2(storedPlayer2);
+    }
+  }, []);
 
-//   const startGame = () => {
-//     localStorage.setItem('player1', player1)
-//     localStorage.setItem('player2', player2)
+  const updateGameConfig = (newConfig: GameData) => {
+    setPlayer1(newConfig.player1)
+    setPlayer2(newConfig.player2)
+    setShowAgora(newConfig.showAgora)
+    setShowPantheon(newConfig.showPantheon)
+    setShowSolo(newConfig.showSolo)
+  };
 
-//     if (player1 && player2) {
-//       if (showAgora || showPantheon || showSolo) {
-//         // Redirigir a "/scorepad"
-//       } else {
-//         // Redirigir a "/home"
-//       }
-//     }
-//   }
+  const gameData: GameData = {
+    player1,
+    player2,
+    showAgora,
+    showPantheon,
+    showSolo,
+  }
 
-//   const gameData: GameData = {
-//     player1,
-//     player2,
-//     showAgora,
-//     showPantheon,
-//     showSolo,
-//   }
-
-//   return (
-//     <GameContext.Provider value={gameData}>
-//       {children}
-//     </GameContext.Provider>
-//   )
-// }
+  return (
+    <GameContext.Provider value={{ gameData, updateGameConfig }}>
+      {children}
+    </GameContext.Provider>
+  );
+}

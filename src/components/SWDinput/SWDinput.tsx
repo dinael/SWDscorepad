@@ -5,23 +5,29 @@ import './SWDinput.scss'
 export type SWDinputProps = {
   id: string
   label: string
-  type?: string
+  showLabel?: boolean
+  type?: 'text' | 'email' | 'password' | 'search' | 'number' | 'tel' | 'url' | 'date' | 'datetime-local' | 'time' | 'datetime' | 'mouth' | 'week' | 'year'
   value?: string
   placeholder?: string
   maxLength?: number
+  variant?: 'vertical' | 'horizontal'
   image?: string
   readOnly?: boolean
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  className?: string
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 export const SWDinput: FC<SWDinputProps> = ({
   id,
   label,
+  showLabel = false,
   type = "text",
   value,
   placeholder,
   maxLength = 2,
   image,
   readOnly = false,
+  variant = 'horizontal',
+  className = '',
   onChange,
   ...props
 }: SWDinputProps) => {
@@ -41,7 +47,7 @@ export const SWDinput: FC<SWDinputProps> = ({
   const pattern = type === "number" ? "\\d*" : undefined
 
   return (
-    <label className="input-wrapper"
+    <label className={`input-wrapper ${variant} ${className}`}
       htmlFor={id}
       {...props}>
       {image && (
@@ -54,7 +60,7 @@ export const SWDinput: FC<SWDinputProps> = ({
         </span>
       )}
       <span
-        className="input-label-text"
+        className={`${!showLabel ? 'sr-only' : 'input-label-text'}`}
         id={`label-${id}`}>
         {label}
       </span>

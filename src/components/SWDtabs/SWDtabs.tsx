@@ -1,4 +1,4 @@
-import { ReactNode, useState, FC, Children, CSSProperties } from 'react'
+import React, { ReactNode, useState, FC, Children, CSSProperties } from 'react'
 
 import './SWDtabs.scss'
 
@@ -7,12 +7,13 @@ export type SWDtabsProps = {
   tabName2: string
   total1: number
   total2: number
+  activeTab?: string
   children: ReactNode
   onTabChange: (activeTab: string) => void
 }
 
 export const SWDtabs: FC<SWDtabsProps> = ({
-  tabName1,
+  tabName1 = '',
   tabName2,
   total1,
   total2,
@@ -20,10 +21,10 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   onTabChange,
   ...props
 }: SWDtabsProps) => {
-  const [activeTab, setActiveTab] = useState(tabName1)
+  const [localActiveTab, setActiveTab] = useState(tabName1)
 
-  const statusTabs1 = activeTab === tabName1 ? 'active' : ''
-  const statusTabs2 = activeTab === tabName2 ? 'active' : ''
+  const statusTabs1 = localActiveTab === tabName1 ? 'active' : ''
+  const statusTabs2 = localActiveTab === tabName2 ? 'active' : ''
 
   return (
     <div className='tabs-wrapper' {...props}>
@@ -63,7 +64,7 @@ export const SWDtabs: FC<SWDtabsProps> = ({
       </div>
       <article className="tabs-container">
         {Children.map(children, (child, index) => {
-          const isActive = activeTab === (index === 0 ? tabName1 : tabName2)
+          const isActive = localActiveTab === (index === 0 ? tabName1 : tabName2)
           const tabStyle: CSSProperties = {
             display: isActive ? 'block' : 'none',
           }
@@ -77,6 +78,5 @@ export const SWDtabs: FC<SWDtabsProps> = ({
     </div>
   )
 }
-
 
 export default SWDtabs

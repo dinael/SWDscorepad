@@ -1,3 +1,9 @@
+.scorepad {
+  display: grid;
+  margin: 0 auto;
+  max-inline-size: var(--SWD-wrapper-width);
+}
+
 .calculate {
   position: sticky;
   inset-block-end: 0;
@@ -32,6 +38,7 @@
     border: max(0.125rem, 2px) solid var(--calculate-btn-border-color, var(--SWD-color-primary));
     color: var(--calculate-btn-color, var(--SWD-button-text-color));
     background: var(--calculate-btn-background, var(--SWD-color-primary));
+    cursor: var(--calculate-btn-cursor, pointer);
 
     &.replay {
       --calculate-btn-color: var(--SWD-color-primary);
@@ -41,6 +48,7 @@
     &:disabled {
       --calculate-btn-border-color: var(--SWD-color-disabled-color, gray);
       --calculate-btn-background: var(--SWD-color-disabled-background, gray);
+      --calculate-btn-cursor: default;
     }
   }
 }

@@ -1,10 +1,10 @@
 import { FC, useState } from 'react'
 
 import './Scorepad.scss'
-import VP2 from '../assets/images/vp-2.svg'
-import SWDtabs from '../components/SWDtabs/SWDtabs'
-import SWDscorepad from '../components/SWDscorepad/SWDscorepad'
-import SWDvictories from '../components/SWDvictories/SWDvictories'
+import VP2 from '@/assets/images/vp-2.svg'
+import SWDtabs from '@/components/SWDtabs/SWDtabs'
+import SWDscorepad from '@/components/SWDscorepad/SWDscorepad'
+import SWDvictories from '@/components/SWDvictories/SWDvictories'
 
 interface ScorepadProps {
 }
@@ -85,6 +85,7 @@ export const Scorepad: FC<ScorepadProps> = (
         tabName2={playerTwo}
         total1={total1}
         total2={total2}
+        activeTab={tabActive}
         onTabChange={handleTabChange}>
         <SWDscorepad
           name={playerOne}
