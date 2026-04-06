@@ -65,7 +65,7 @@
 
   &::placeholder,
   &::-ms-input-placeholder {
-    color: var(--input-field-placeholder-color, var(--SWD-text-color-opacity));
+    color: var(--input-field-placeholder-color, var(--SWD-text-color-opacity, #9f9f9f));
   }
 
   &:not(:placeholder-shown) {
