@@ -1,3 +1,9 @@
+.scorepad {
+  display: grid;
+  margin: 0 auto;
+  max-inline-size: 35rem;
+}
+
 .calculate {
   position: sticky;
   inset-block-end: 0;

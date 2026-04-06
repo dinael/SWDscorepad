@@ -1,51 +1,70 @@
-import { FC } from 'react'
-import './SWDvictories.scss'
+import { FC, memo } from "react";
+import styles from "./SWDvictories.module.scss";
 
-import vp from '/src/assets/images/vp.svg'
+import vp from "/src/assets/images/vp.svg";
 
 type SWDvictoriesProps = {
-  showAgora?: boolean
-  disabled?: boolean
-  onMilitaryVictory?: () => void
-  onProgressVictory?: () => void
-  onPoliticalVictory?: () => void
-}
+  showAgora?: boolean;
+  disabled?: boolean;
+  onMilitaryVictory?: () => void;
+  onProgressVictory?: () => void;
+  onPoliticalVictory?: () => void;
+};
 
-const SWDvictories: FC<SWDvictoriesProps> = ({
-  showAgora = false,
-  disabled = false,
-  onMilitaryVictory,
-  onProgressVictory,
-  onPoliticalVictory
-}: SWDvictoriesProps) => {
-  return (
-    <div className='victory-bar'>
-      <button
-        className='victory-btn military'
-        disabled={disabled}
-        onClick={() => onMilitaryVictory && onMilitaryVictory()}>
-        <img className='victory-symbol' src={vp} alt="" aria-hidden="true" />
-        <span className='victory-label'>Military</span>
-      </button>
-      <button
-        className='victory-btn progress'
-        disabled={disabled}
-        onClick={() => onProgressVictory && onProgressVictory()}>
-        <img className='victory-symbol' src={vp} alt="" aria-hidden="true" />
-        <span className='victory-label'>Progress</span>
-      </button>
-      {showAgora && (
+const SWDvictories: FC<SWDvictoriesProps> = memo(
+  ({
+    showAgora = false,
+    disabled = false,
+    onMilitaryVictory,
+    onProgressVictory,
+    onPoliticalVictory,
+  }: SWDvictoriesProps) => {
+    return (
+      <div className={styles.victoryBar}>
         <button
-          className='victory-btn political'
+          className={`${styles.victoryBtn} ${styles.military}`}
           disabled={disabled}
-          onClick={() => onPoliticalVictory && onPoliticalVictory()}>
-          <img className='victory-symbol' src={vp} alt="" aria-hidden="true" />
-          <span className='victory-label'>Political</span>
+          onClick={onMilitaryVictory}
+        >
+          <img
+            className={styles.victorySymbol}
+            src={vp}
+            alt=""
+            aria-hidden="true" />
+          <span className={styles.victoryLabel}>Military</span>
         </button>
-      )}
-    </div>
-  )
-}
+        <button
+          className={`${styles.victoryBtn} ${styles.progress}`}
+          disabled={disabled}
+          onClick={onProgressVictory}
+        >
+          <img
+            className={styles.victorySymbol}
+            src={vp}
+            alt=""
+            aria-hidden="true" />
+          <span className={styles.victoryLabel}>Progress</span>
+        </button>
+        {showAgora && (
+          <button
+            className={`${styles.victoryBtn} ${styles.political}`}
+            disabled={disabled}
+            onClick={onPoliticalVictory}
+          >
+            <img
+              className={styles.victorySymbol}
+              src={vp}
+              alt=""
+              aria-hidden="true"
+            />
+            <span className={styles.victoryLabel}>
+              Political
+            </span>
+          </button>
+        )}
+      </div>
+    );
+  },
+);
 
-
-export default SWDvictories
+export default SWDvictories;

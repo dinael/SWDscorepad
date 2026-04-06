@@ -23,8 +23,17 @@
   -webkit-text-size-adjust: 100%;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-size: 16px;
+  margin: 0;
+  padding: 0;
+  min-height: 100dvh;
 }
 
 h1,

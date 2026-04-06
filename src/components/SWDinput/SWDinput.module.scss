@@ -1,12 +1,16 @@
-.input-wrapper {
+.inputWrapper {
   display: grid;
   grid-template-columns: 3.5rem 1fr;
   align-items: center;
   gap: 1.5rem;
   inline-size: 100%;
+
+  & + & {
+    margin-block-start: 0.5rem;
+  }
 }
 
-.input-label-text {
+.inputLabelText {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -17,7 +21,7 @@
   border: 0;
 }
 
-.input-image-wrapper {
+.inputImageWrapper {
   display: flex;
   flex: 1 0 auto;
   justify-content: center;
@@ -26,20 +30,7 @@
   block-size: 2.75rem;
 }
 
-.input-equal {
-  line-height: 0;
-  font-size: 2.875rem;
-  padding-inline: 0.25rem;
-  color: var(--SWD-color-primary);
-}
-
-.input-image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.input-field {
+.inputField {
   font-family: var(--SWD-title-font-family);
   font-size: 1.5rem;
   text-align: end;
@@ -63,7 +54,6 @@
     margin: 0;
   }
 
-  /* Firefox */
   &[type="number"] {
     -moz-appearance: textfield;
   }

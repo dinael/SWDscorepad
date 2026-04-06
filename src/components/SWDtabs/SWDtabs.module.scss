@@ -1,9 +1,9 @@
-.tabs-wrapper {
+.tabsWrapper {
   display: grid;
   inline-size: 100%;
 }
 
-.tabs-bar {
+.tabsBar {
   position: sticky;
   inset-block-start: 0;
   display: flex;
@@ -12,10 +12,10 @@
   width: 100%;
   margin-block-end: 2rem;
   border-block-end: max(0.0625rem, 1px) solid var(--SWD-color-primary);
-  background: var(--SWD-background-color)
+  background: var(--SWD-background-color);
 }
 
-.tabs-control {
+.tabsControl {
   appearance: none;
   position: relative;
   font-family: var(--SWD-title-font-family);
@@ -29,7 +29,6 @@
   background: none;
   border: none;
   cursor: pointer;
-  // Ellipsis
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -38,11 +37,9 @@
   &.active {
     --total-background: var(--SWD-color-primary);
     --total-scale: 1;
-
     color: var(--SWD-color-primary);
     border-block-end: max(0.25rem, 4px) solid var(--SWD-color-primary);
   }
-
 }
 
 .total {
@@ -61,12 +58,16 @@
   background: var(--total-background, var(--SWD-text-color));
   transform: scale(var(--total-scale, 0.75));
   transition: all .25s ease-in-out;
-
-  :empty {
-    --total-scale: 0;
-  }
 }
 
-.tabs-container {
+.tabsContainer {
   padding-inline: 2rem;
+}
+
+.tabContent {
+  display: block;
+}
+
+.tabContentHidden {
+  display: none;
 }

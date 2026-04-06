@@ -1,7 +1,7 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // import Home from '../view/Home'
-import Scorepad from '../view/Scorepad'
+import Scorepad from "../view/Scorepad";
 // import NotFound from '../view/NotFound'
 
 const routes = createBrowserRouter([
@@ -13,7 +13,6 @@ const routes = createBrowserRouter([
   //   path: "*",
   //   element: <NotFound />,
   // }
-
 ]);
 
 const Router = () => <RouterProvider router={routes} />;

@@ -1,6 +1,6 @@
-import { ReactNode, useState, FC, Children, CSSProperties } from 'react'
+import { ReactNode, useState, FC, Children } from 'react'
 
-import './SWDtabs.scss'
+import styles from './SWDtabs.module.scss'
 
 export type SWDtabsProps = {
   tabName1: string
@@ -18,7 +18,6 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   total2,
   children,
   onTabChange,
-  ...props
 }: SWDtabsProps) => {
   const [activeTab, setActiveTab] = useState(tabName1)
 
@@ -26,10 +25,10 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   const statusTabs2 = activeTab === tabName2 ? 'active' : ''
 
   return (
-    <div className='tabs-wrapper' {...props}>
-      <div className="tabs-bar">
+    <div className={styles.tabsWrapper}>
+      <div className={styles.tabsBar}>
         <button
-          className={`tabs-control ${statusTabs1}`}
+          className={`${styles.tabsControl} ${statusTabs1 ? styles.active : ''}`}
           type='button'
           onClick={() => {
             setActiveTab(tabName1)
@@ -38,14 +37,14 @@ export const SWDtabs: FC<SWDtabsProps> = ({
           {tabName1}
           {total1 > 0 &&
             <span
-              className='total'
+              className={styles.total}
               aria-label={`VP total de ${tabName1}:`}>
               {total1 > 0 ? total1 : null}
             </span>
           }
         </button>
         <button
-          className={`tabs-control ${statusTabs2}`}
+          className={`${styles.tabsControl} ${statusTabs2 ? styles.active : ''}`}
           type='button'
           onClick={() => {
             setActiveTab(tabName2)
@@ -54,21 +53,18 @@ export const SWDtabs: FC<SWDtabsProps> = ({
           {tabName2}
           {total2 > 0 &&
             <span
-              className='total'
-              aria-label={`VP total de ${tabName1}:`}>
+              className={styles.total}
+              aria-label={`VP total de ${tabName2}:`}>
               {total2 > 0 ? total2 : null}
             </span>
           }
         </button>
       </div>
-      <article className="tabs-container">
+      <article className={styles.tabsContainer}>
         {Children.map(children, (child, index) => {
           const isActive = activeTab === (index === 0 ? tabName1 : tabName2)
-          const tabStyle: CSSProperties = {
-            display: isActive ? 'block' : 'none',
-          }
           return (
-            <div style={tabStyle}>
+            <div className={isActive ? styles.tabContent : styles.tabContentHidden}>
               {child}
             </div>
           )
