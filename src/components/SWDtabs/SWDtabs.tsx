@@ -1,16 +1,16 @@
-import React, { ReactNode, useState, FC, Children, CSSProperties } from 'react'
+import { ReactNode, useState, FC, Children } from "react";
 
-import './SWDtabs.scss'
+import styles from "./SWDtabs.module.scss";
 
 export type SWDtabsProps = {
-  tabName1: string
-  tabName2: string
-  total1: number
-  total2: number
-  activeTab?: string
-  children: ReactNode
-  onTabChange: (activeTab: string) => void
-}
+  tabName1: string;
+  tabName2: string;
+  total1: number;
+  total2: number;
+  children: ReactNode;
+  activeTab?: string;
+  onTabChange: (activeTab: string) => void;
+};
 
 export const SWDtabs: FC<SWDtabsProps> = ({
   tabName1 = '',
@@ -18,65 +18,70 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   total1,
   total2,
   children,
+  activeTab: externalActiveTab,
   onTabChange,
-  ...props
 }: SWDtabsProps) => {
-  const [localActiveTab, setActiveTab] = useState(tabName1)
+  const [internalActiveTab, setInternalActiveTab] = useState(tabName1);
+  const activeTab = externalActiveTab ?? internalActiveTab;
+  const setActiveTab = externalActiveTab ? () => {} : setInternalActiveTab;
 
-  const statusTabs1 = localActiveTab === tabName1 ? 'active' : ''
-  const statusTabs2 = localActiveTab === tabName2 ? 'active' : ''
+  const statusTabs1 = activeTab === tabName1 ? "active" : "";
+  const statusTabs2 = activeTab === tabName2 ? "active" : "";
 
   return (
-    <div className='tabs-wrapper' {...props}>
-      <div className="tabs-bar">
+    <div className={styles.tabsWrapper}>
+      <div className={styles.tabsBar}>
         <button
-          className={`tabs-control ${statusTabs1}`}
-          type='button'
+          className={`${styles.tabsControl} ${statusTabs1 ? styles.active : ""}`}
+          type="button"
           onClick={() => {
-            setActiveTab(tabName1)
-            onTabChange(tabName1)
-          }}>
+            setActiveTab(tabName1);
+            onTabChange(tabName1);
+          }}
+        >
           {tabName1}
-          {total1 > 0 &&
+          {total1 > 0 && (
             <span
-              className='total'
-              aria-label={`VP total de ${tabName1}:`}>
+              className={styles.total}
+              aria-label={`VP total de ${tabName1}:`}
+            >
               {total1 > 0 ? total1 : null}
             </span>
-          }
+          )}
         </button>
         <button
-          className={`tabs-control ${statusTabs2}`}
-          type='button'
+          className={`${styles.tabsControl} ${statusTabs2 ? styles.active : ""}`}
+          type="button"
           onClick={() => {
-            setActiveTab(tabName2)
-            onTabChange(tabName2)
-          }}>
+            setActiveTab(tabName2);
+            onTabChange(tabName2);
+          }}
+        >
           {tabName2}
-          {total2 > 0 &&
+          {total2 > 0 && (
             <span
-              className='total'
-              aria-label={`VP total de ${tabName1}:`}>
+              className={styles.total}
+              aria-label={`VP total de ${tabName2}:`}
+            >
               {total2 > 0 ? total2 : null}
             </span>
-          }
+          )}
         </button>
       </div>
-      <article className="tabs-container">
+      <article className={styles.tabsContainer}>
         {Children.map(children, (child, index) => {
-          const isActive = localActiveTab === (index === 0 ? tabName1 : tabName2)
-          const tabStyle: CSSProperties = {
-            display: isActive ? 'block' : 'none',
-          }
+          const isActive = activeTab === (index === 0 ? tabName1 : tabName2);
           return (
-            <div style={tabStyle}>
+            <div
+              className={isActive ? styles.tabContent : styles.tabContentHidden}
+            >
               {child}
             </div>
-          )
+          );
         })}
       </article>
     </div>
-  )
-}
+  );
+};
 
-export default SWDtabs
+export default SWDtabs;

@@ -1,0 +1,76 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  inline-size: 100%;
+}
+
+.title {
+  font-size: 1rem;
+  padding-inline: 1rem;
+}
+
+.menuContainer {
+  position: relative;
+  inset-block-end: 0;
+}
+
+.menuButton {
+  appearance: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  margin-inline-start: auto;
+  color: var(--SWD-text-color);
+}
+
+.menu {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-end: 0.75rem;
+  font-family: var(--SWD-title-font-family);
+  font-size: 1.5rem;
+  background: var(--SWD-background-color);
+  border: 0.0625rem solid var(--SWD-color-primary);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  min-inline-size: 9.375rem;
+  z-index: 100;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15);
+
+  .menuTitle {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.875rem;
+    color: var(--SWD-text-color-opacity);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-block-end: 0.5rem;
+    border-block-end: max(0.0625rem, 1px) solid var(--SWD-color-primary);
+  }
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
+
+  &:hover {
+    background: var(--SWD-color-primary);
+    color: var(--SWD-button-text-color);
+  }
+
+  input {
+    cursor: pointer;
+  }
+
+  span {
+    font-size: 1rem;
+  }
+}

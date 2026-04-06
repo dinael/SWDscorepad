@@ -1,8 +1,8 @@
-import { FC, ChangeEvent } from 'react'
+import { FC, ChangeEvent } from "react";
 
-import './SWDconfig.scss'
+import "./SWDconfig.scss";
 
-import SWDinput from '@/components/SWDinput/SWDinput';
+import SWDinput from "@/components/SWDinput/SWDinput";
 
 export type SWDConfigProps = {
   player1: string;
@@ -13,7 +13,7 @@ export type SWDConfigProps = {
   handlePlayer2Change: (event: ChangeEvent<HTMLInputElement>) => void;
   handleAgoraChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handlePantheonChange: (event: ChangeEvent<HTMLInputElement>) => void;
-}
+};
 
 const SWDconfig: FC<SWDConfigProps> = ({
   player1,

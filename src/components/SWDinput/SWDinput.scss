@@ -58,8 +58,8 @@
   block-size: 2.75rem;
   padding-inline: 1rem;
   border-radius: max(0.25rem, 4px);
-  border: max(0.0625rem, 1px) solid transparent;
-  border-block-end-color: var(--input-field-border-color, var(--SWD-input-color-opacity));
+  border: max(0.125rem, 2px) solid
+    var(--input-field-border-color, var(--SWD-input-color-opacity));
   color: #000;
   background: none; //var(--input-field-background, var(--SWD-input-color-opacity));
 

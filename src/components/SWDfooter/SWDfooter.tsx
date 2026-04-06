@@ -1,33 +1,27 @@
-import { FC } from 'react';
+import { FC } from "react";
+import styles from "./SWDfooter.module.scss";
 
-import './SWDfooter.scss'
+export type SWDfooterProps = {
+  title?: string;
+};
 
-import logo from '@/assets/images/logo.svg'
-
-export interface SWDfooterProps {
-  title?: string
-}
-
-export const SWDheader: FC<SWDfooterProps> = ({
-  title = ''
+export const SWDfooter: FC<SWDfooterProps> = ({
+  title = "",
 }: SWDfooterProps) => {
   return (
-    <footer className='SWDfooter'>
-      <img
-        className='swd-logo'
-        src={logo}
-        alt="7 wonders score pad logo" aria-hidden="true" />
-      <p>
+    <footer className={styles.wrapper}>
+      <p className={styles.title}>
         {title}
-        <a
+        {/* <a
           target="_blank"
-          href="https://www.amazon.es/gp/search?ie=UTF8&tag=dinael-21&linkCode=ur2&linkId=766589dbada7e94d9716b44141e8cb31&camp=3638&creative=24630&index=toys&keywords=7 wonder duel">
+          rel="noopener noreferrer"
+          href="https://www.amazon.es/gp/search?ie=UTF8&tag=dinael-21&linkCode=ur2&linkId=766589dbada7e94d9716b44141e8cb31&camp=3638&creative=24630&index=toys&keywords=7 wonder duel"
+        >
           Compra 7 wonder duel, sus expansiones y muchos más juegos de mesa
-        </a>
+        </a> */}
       </p>
     </footer>
   );
-}
+};
 
-export default SWDheader;
-
+export default SWDfooter;

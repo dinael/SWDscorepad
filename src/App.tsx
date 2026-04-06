@@ -1,15 +1,11 @@
-
-import Router from './router/Router'
-
-import { GameProvider } from '@/providers/GameContext'
-
-import SWDheader from '@/components/SWDheader/SWDheader'
-import SWDfooter from '@/components/SWDfooter/SWDfooter'
+import { GameProvider } from "./context/GameContext";
+import Router from "./router/Router";
+import SWDheader from "./components/SWDheader/SWDheader";
+import SWDfooter from "./components/SWDfooter/SWDfooter";
 
 function App() {
-
   return (
-    <>
+    <GameProvider>
       <SWDheader />
       <main className="App">
         <GameProvider>
@@ -17,8 +13,8 @@ function App() {
         </GameProvider>
       </main>
       <SWDfooter />
-    </>
-  )
+    </GameProvider>
+  );
 }
 
-export default App
+export default App;
