@@ -9,45 +9,45 @@
   inset-block-end: 0;
   padding-block: 1rem;
   background: var(--SWD-background-color);
+}
 
-  .calculateWinner {
-    display: flex;
-    gap: 0.25rem;
-    text-transform: capitalize;
-    align-items: center;
-    justify-content: center;
-    padding-block: 0.5em;
-    border-radius: max(0.25rem, 4px);
-    color: var(--SWD-button-text-color);
-    background: hsl(120, 100%, 80%);
+.calculateWinner {
+  display: flex;
+  gap: 0.25rem;
+  text-transform: capitalize;
+  align-items: center;
+  justify-content: center;
+  padding-block: 0.5em;
+  border-radius: max(0.25rem, 4px);
+  color: var(--SWD-button-text-color);
+  background: hsl(120, 100%, 80%);
 
-    img {
-      block-size: 1.5rem;
-      inline-size: 1.5rem;
-    }
+  img {
+    block-size: 1.5rem;
+    inline-size: 1.5rem;
+  }
+}
+
+.calculateBtn {
+  appearance: none;
+  inline-size: 100%;
+  block-size: 4rem;
+  font-family: var(--SWD-title-font-family);
+  font-weight: 800;
+  font-size: 2rem;
+  border-radius: max(0.25rem, 4px);
+  border: max(0.125rem, 2px) solid
+    var(--calculate-btn-border-color, var(--SWD-color-primary));
+  color: var(--calculate-btn-color, var(--SWD-button-text-color));
+  background: var(--calculate-btn-background, var(--SWD-color-primary));
+
+  &.replay {
+    --calculate-btn-color: var(--SWD-color-primary);
+    --calculate-btn-background: var(--SWD-button-text-color);
   }
 
-  .calculateBtn {
-    appearance: none;
-    inline-size: 100%;
-    block-size: 4rem;
-    font-family: var(--SWD-title-font-family);
-    font-weight: 800;
-    font-size: 2rem;
-    border-radius: max(0.25rem, 4px);
-    border: max(0.125rem, 2px) solid
-      var(--calculate-btn-border-color, var(--SWD-color-primary));
-    color: var(--calculate-btn-color, var(--SWD-button-text-color));
-    background: var(--calculate-btn-background, var(--SWD-color-primary));
-
-    &.replay {
-      --calculate-btn-color: var(--SWD-color-primary);
-      --calculate-btn-background: var(--SWD-button-text-color);
-    }
-
-    &:disabled {
-      --calculate-btn-border-color: var(--SWD-color-disabled-color, gray);
-      --calculate-btn-background: var(--SWD-color-disabled-background, gray);
-    }
+  &:disabled {
+    --calculate-btn-border-color: var(--SWD-color-disabled-color, gray);
+    --calculate-btn-background: var(--SWD-color-disabled-background, gray);
   }
 }
