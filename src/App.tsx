@@ -8,9 +8,7 @@ function App() {
     <GameProvider>
       <SWDheader />
       <main className="App">
-        <GameProvider>
-          <Router />
-        </GameProvider>
+        <Router />
       </main>
       <SWDfooter />
     </GameProvider>

@@ -1,4 +1,5 @@
-import { FC, useState, useCallback, useMemo } from "react";
+import { FC, useState, useCallback, useMemo, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import styles from "./Scorepad.module.scss";
 import VP2 from "../../assets/images/vp-2.svg";
@@ -11,10 +12,12 @@ const player1 = "";
 const player2 = "";
 
 export const Scorepad: FC = () => {
+  const { t, i18n } = useTranslation();
   const { showAgora, showPantheon } = useGame();
+  const language = i18n.language;
 
-  const playerOne = player1.trim() === "" ? "Ludio I" : player1;
-  const playerTwo = player2.trim() === "" ? "Ludio II" : player2;
+  const playerOne = player1.trim() === "" ? t("player1") : player1;
+  const playerTwo = player2.trim() === "" ? t("player2") : player2;
 
   const [total1, setTotal1] = useState<number>(0);
   const [total2, setTotal2] = useState<number>(0);
@@ -30,6 +33,14 @@ export const Scorepad: FC = () => {
     political: "",
   });
   const [resetKey, setResetKey] = useState(0);
+
+  useEffect(() => {
+    if (tabActive === playerOne || tabActive === playerTwo) {
+      setTabActive(playerOne);
+    } else {
+      setTabActive(playerOne);
+    }
+  }, [language]);
 
   const updateTotal1 = useCallback((newTotal: number) => {
     setTotal1(newTotal);
@@ -107,7 +118,7 @@ export const Scorepad: FC = () => {
         onTabChange={handleTabChange}
       >
         <SWDscorepad
-          key={`p1-${resetKey}`}
+          key={`p1-${resetKey}-${language}`}
           name={playerOne}
           showAgora={showAgora}
           showPantheon={showPantheon}
@@ -115,7 +126,7 @@ export const Scorepad: FC = () => {
           readOnly={inputReadOnly}
         />
         <SWDscorepad
-          key={`p2-${resetKey}`}
+          key={`p2-${resetKey}-${language}`}
           name={playerTwo}
           showAgora={showAgora}
           showPantheon={showPantheon}
@@ -148,7 +159,7 @@ export const Scorepad: FC = () => {
           id="calculate"
           onClick={btnStatus}
         >
-          {showReplay ? "Replay" : "Calculate"}
+          {showReplay ? t("replay") : t("calculate")}
         </button>
       </div>
     </section>

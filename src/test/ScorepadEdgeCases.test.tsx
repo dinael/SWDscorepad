@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 import { render } from "./testUtils";
-import { Scorepad } from "../view/Scorepad";
+import { Scorepad } from "../view/scorepad/Scorepad";
 import { fireEvent } from "@testing-library/react";
 
 describe("Scorepad - Replay", () => {
@@ -69,7 +69,7 @@ describe("Scorepad - Edge Cases", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText(/The winner is Ludio I/)).toBeInTheDocument();
+      expect(screen.getByText(/The winner is Player 1/)).toBeInTheDocument();
     });
   });
 
@@ -80,7 +80,7 @@ describe("Scorepad - Edge Cases", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/military victory to Ludio I/),
+        screen.getByText(/Military Victory to Player 1/),
       ).toBeInTheDocument();
     });
   });
@@ -92,7 +92,7 @@ describe("Scorepad - Edge Cases", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/progress victory to Ludio I/),
+        screen.getByText(/Progress Victory to Player 1/),
       ).toBeInTheDocument();
     });
   });
@@ -104,7 +104,7 @@ describe("Scorepad - Edge Cases", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/political victory to Ludio I/),
+        screen.getByText(/Political Victory to Player 1/),
       ).toBeInTheDocument();
     });
   });

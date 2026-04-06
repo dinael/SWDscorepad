@@ -1,4 +1,5 @@
-import { ReactNode, useState, FC, Children } from "react";
+import { ReactNode, useState, FC, Children, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import styles from "./SWDtabs.module.scss";
 
@@ -21,7 +22,13 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   activeTab: externalActiveTab,
   onTabChange,
 }: SWDtabsProps) => {
+  const { t } = useTranslation();
   const [internalActiveTab, setInternalActiveTab] = useState(tabName1);
+
+  useEffect(() => {
+    setInternalActiveTab(tabName1);
+  }, [tabName1]);
+
   const activeTab = externalActiveTab ?? internalActiveTab;
   const setActiveTab = externalActiveTab ? () => {} : setInternalActiveTab;
 
@@ -43,7 +50,7 @@ export const SWDtabs: FC<SWDtabsProps> = ({
           {total1 > 0 && (
             <span
               className={styles.total}
-              aria-label={`VP total de ${tabName1}:`}
+              aria-label={`${t("vpTotal")} ${tabName1}:`}
             >
               {total1 > 0 ? total1 : null}
             </span>
@@ -61,7 +68,7 @@ export const SWDtabs: FC<SWDtabsProps> = ({
           {total2 > 0 && (
             <span
               className={styles.total}
-              aria-label={`VP total de ${tabName2}:`}
+              aria-label={`${t("vpTotal")} ${tabName2}:`}
             >
               {total2 > 0 ? total2 : null}
             </span>

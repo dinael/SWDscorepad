@@ -3,21 +3,36 @@ import {
   useContext,
   useState,
   useCallback,
+  useEffect,
   ReactNode,
 } from "react";
+import { useTranslation } from "react-i18next";
 
 type GameContextType = {
   showAgora: boolean;
   showPantheon: boolean;
   toggleAgora: () => void;
   togglePantheon: () => void;
+  language: string;
 };
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
 export const GameProvider = ({ children }: { children: ReactNode }) => {
-  const [showAgora, setShowAgora] = useState(true);
-  const [showPantheon, setShowPantheon] = useState(true);
+  const { i18n } = useTranslation();
+  const [showAgora, setShowAgora] = useState(false);
+  const [showPantheon, setShowPantheon] = useState(false);
+  const [language, setLanguage] = useState(i18n.language);
+
+  useEffect(() => {
+    const handleLanguageChange = () => {
+      setLanguage(i18n.language);
+    };
+    i18n.on("languageChanged", handleLanguageChange);
+    return () => {
+      i18n.off("languageChanged", handleLanguageChange);
+    };
+  }, [i18n]);
 
   const toggleAgora = useCallback(() => {
     setShowAgora((prev) => !prev);
@@ -29,7 +44,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <GameContext.Provider
-      value={{ showAgora, showPantheon, toggleAgora, togglePantheon }}
+      value={{ showAgora, showPantheon, toggleAgora, togglePantheon, language }}
     >
       {children}
     </GameContext.Provider>
