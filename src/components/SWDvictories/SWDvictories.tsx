@@ -67,4 +67,4 @@ const SWDvictories: FC<SWDvictoriesProps> = memo(
   },
 );
 
-export default SWDvictories
+export default SWDvictories;

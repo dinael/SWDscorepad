@@ -13,7 +13,7 @@ export type SWDtabsProps = {
 };
 
 export const SWDtabs: FC<SWDtabsProps> = ({
-  tabName1 = '',
+  tabName1 = "",
   tabName2,
   total1,
   total2,
