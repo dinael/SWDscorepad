@@ -36,16 +36,16 @@
   text-align: end;
   display: flex;
   flex: 1 1 100%;
-  inline-size: calc(100% - 2.75rem);
+  inline-size: 100%;
   font-weight: 800;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: textfield;
-  block-size: 2.75rem;
+  block-size: 3.5rem;
   padding-inline: 1rem;
   border-radius: max(0.25rem, 4px);
   border: max(0.125rem, 2px) solid var(--input-field-border-color, var(--SWD-input-color-opacity));
-  color: #000;
+  color: hsl(0, 0%, 0%);
   background: var(--input-field-background, var(--SWD-input-color-opacity));
 
   &::-webkit-outer-spin-button,
