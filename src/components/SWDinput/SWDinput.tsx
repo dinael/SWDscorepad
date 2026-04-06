@@ -47,7 +47,10 @@ export const SWDinput: FC<SWDinputProps> = memo(
     const pattern = type === "number" ? "\\d*" : undefined;
 
     return (
-      <label className={`${styles.inputWrapper} ${className || ""}`} htmlFor={id}>
+      <label
+        className={`${styles.inputWrapper} ${className || ""}`}
+        htmlFor={id}
+      >
         {image && (
           <span className={styles.inputImageWrapper}>
             <img className="" src={image} alt={label} aria-hidden="true" />

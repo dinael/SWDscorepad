@@ -30,7 +30,8 @@ const SWDvictories: FC<SWDvictoriesProps> = memo(
             className={styles.victorySymbol}
             src={vp}
             alt=""
-            aria-hidden="true" />
+            aria-hidden="true"
+          />
           <span className={styles.victoryLabel}>Military</span>
         </button>
         <button
@@ -42,7 +43,8 @@ const SWDvictories: FC<SWDvictoriesProps> = memo(
             className={styles.victorySymbol}
             src={vp}
             alt=""
-            aria-hidden="true" />
+            aria-hidden="true"
+          />
           <span className={styles.victoryLabel}>Progress</span>
         </button>
         {showAgora && (
@@ -57,9 +59,7 @@ const SWDvictories: FC<SWDvictoriesProps> = memo(
               alt=""
               aria-hidden="true"
             />
-            <span className={styles.victoryLabel}>
-              Political
-            </span>
+            <span className={styles.victoryLabel}>Political</span>
           </button>
         )}
       </div>

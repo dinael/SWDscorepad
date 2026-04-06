@@ -1,134 +1,149 @@
-import { FC, useState } from 'react'
+import { FC, useState } from "react";
 
-import './Scorepad.scss'
-import VP2 from '@/assets/images/vp-2.svg'
-import SWDtabs from '@/components/SWDtabs/SWDtabs'
-import SWDscorepad from '@/components/SWDscorepad/SWDscorepad'
-import SWDvictories from '@/components/SWDvictories/SWDvictories'
+import "./Scorepad.scss";
+import VP2 from "@/assets/images/vp-2.svg";
+import SWDtabs from "@/components/SWDtabs/SWDtabs";
+import SWDscorepad from "@/components/SWDscorepad/SWDscorepad";
+import SWDvictories from "@/components/SWDvictories/SWDvictories";
 
-interface ScorepadProps {
-}
+interface ScorepadProps {}
 
-const player1 = ''
-const player2 = ''
-const agora = true
-const pantheon = true
+const player1 = "";
+const player2 = "";
+const agora = true;
+const pantheon = true;
 
-export const Scorepad: FC<ScorepadProps> = (
-  ...props
-) => {
+export const Scorepad: FC<ScorepadProps> = (...props) => {
+  const playerOne = player1.trim() === "" ? "Ludio I" : player1;
+  const playerTwo = player2.trim() === "" ? "Ludio II" : player2;
 
-  const playerOne = player1.trim() === '' ? 'Ludio I' : player1
-  const playerTwo = player2.trim() === '' ? 'Ludio II' : player2
-
-  const [total1, setTotal1] = useState<number>(0)
-  const [total2, setTotal2] = useState<number>(0)
-  const [tabActive, setTabActive] = useState<string>(playerOne)
-  const [winner, setWinner] = useState<string | null>(null)
-  const [activeVictoryType, setActiveVictoryType] = useState<string>('')
-  const [victoryMessages, setVictoryMessages] = useState<{ [key: string]: string }>({
-    military: '',
-    progress: '',
-    political: '',
-  })
+  const [total1, setTotal1] = useState<number>(0);
+  const [total2, setTotal2] = useState<number>(0);
+  const [tabActive, setTabActive] = useState<string>(playerOne);
+  const [winner, setWinner] = useState<string | null>(null);
+  const [activeVictoryType, setActiveVictoryType] = useState<string>("");
+  const [victoryMessages, setVictoryMessages] = useState<{
+    [key: string]: string;
+  }>({
+    military: "",
+    progress: "",
+    political: "",
+  });
 
   const updateTotal1 = (newTotal: number) => {
-    setTotal1(newTotal)
-  }
+    setTotal1(newTotal);
+  };
 
   const updateTotal2 = (newTotal: number) => {
-    setTotal2(newTotal)
-  }
+    setTotal2(newTotal);
+  };
 
   const handleTabChange = (activeTab: string) => {
-    setTabActive(activeTab)
-  }
+    setTabActive(activeTab);
+  };
 
   const handleVictory = (type: string) => {
-    if (activeVictoryType !== '') {
-      return
+    if (activeVictoryType !== "") {
+      return;
     }
 
-    const message = `${type} victory to ${tabActive}`
-    setVictoryMessages({ ...victoryMessages, [type]: message })
-    setActiveVictoryType(type)
-    setWinner(tabActive)
-  }
+    const message = `${type} victory to ${tabActive}`;
+    setVictoryMessages({ ...victoryMessages, [type]: message });
+    setActiveVictoryType(type);
+    setWinner(tabActive);
+  };
 
   const handleCalculateClick = () => {
     if (total1 === 0 && total2 === 0) {
-      setWinner(null)
+      setWinner(null);
     } else {
-      const winner = total1 > total2 ? playerOne : total2 > total1 ? playerTwo : 'Empate'
-      setWinner(winner)
+      const winner =
+        total1 > total2 ? playerOne : total2 > total1 ? playerTwo : "Empate";
+      setWinner(winner);
     }
-  }
+  };
 
   const reloadPage = () => {
-    window.location.reload()
-  }
+    window.location.reload();
+  };
 
-  const inputReadOnly = winner ? true : false
+  const inputReadOnly = winner ? true : false;
 
   const victoryDisabled = winner || activeVictoryType ? true : false;
 
-  const btnDisabled = total1 === 0 && total2 === 0 && !activeVictoryType
-  const btnStatus = winner ? reloadPage : handleCalculateClick
+  const btnDisabled = total1 === 0 && total2 === 0 && !activeVictoryType;
+  const btnStatus = winner ? reloadPage : handleCalculateClick;
 
   return (
     <section
       className="scorepad"
-      style={{ display: 'grid', margin: '0 auto', maxInlineSize: '35rem' }}
-      {...props}>
+      style={{ display: "grid", margin: "0 auto", maxInlineSize: "35rem" }}
+      {...props}
+    >
       <SWDtabs
         tabName1={playerOne}
         tabName2={playerTwo}
         total1={total1}
         total2={total2}
         activeTab={tabActive}
-        onTabChange={handleTabChange}>
+        onTabChange={handleTabChange}
+      >
         <SWDscorepad
           name={playerOne}
           showAgora={agora}
           showPantheon={pantheon}
           onUpdateTotal={updateTotal1}
-          readOnly={inputReadOnly} />
+          readOnly={inputReadOnly}
+        />
         <SWDscorepad
           name={playerTwo}
           showAgora={agora}
           showPantheon={pantheon}
           onUpdateTotal={updateTotal2}
-          readOnly={inputReadOnly} />
+          readOnly={inputReadOnly}
+        />
       </SWDtabs>
       <SWDvictories
         showAgora={agora}
         disabled={victoryDisabled}
-        onMilitaryVictory={() => handleVictory('military')}
-        onProgressVictory={() => handleVictory('progress')}
-        onPoliticalVictory={() => handleVictory('political')} />
-      <div className='calculate'>
-        {activeVictoryType &&
-          <p className='calculate-winner'>
-            <img className='victory-symbol' src={VP2} alt="" aria-hidden="true" />
+        onMilitaryVictory={() => handleVictory("military")}
+        onProgressVictory={() => handleVictory("progress")}
+        onPoliticalVictory={() => handleVictory("political")}
+      />
+      <div className="calculate">
+        {activeVictoryType && (
+          <p className="calculate-winner">
+            <img
+              className="victory-symbol"
+              src={VP2}
+              alt=""
+              aria-hidden="true"
+            />
             {victoryMessages[activeVictoryType]}
           </p>
-        }
-        {winner && !activeVictoryType &&
-          <p className='calculate-winner'>
-            <img className='victory-symbol' src={VP2} alt="" aria-hidden="true" />
+        )}
+        {winner && !activeVictoryType && (
+          <p className="calculate-winner">
+            <img
+              className="victory-symbol"
+              src={VP2}
+              alt=""
+              aria-hidden="true"
+            />
             The winner is {winner}
           </p>
-        }
+        )}
         <button
-          className={`calculate-btn ${winner && 'replay'}`}
+          className={`calculate-btn ${winner && "replay"}`}
           disabled={btnDisabled}
           id="calculate"
-          onClick={btnStatus}>
-          {winner ? 'Replay' : 'Calculate'}
+          onClick={btnStatus}
+        >
+          {winner ? "Replay" : "Calculate"}
         </button>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Scorepad
+export default Scorepad;

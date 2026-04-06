@@ -12,7 +12,7 @@
   width: 100%;
   margin-block-end: 2rem;
   border-block-end: max(0.0625rem, 1px) solid var(--SWD-color-primary);
-  background: var(--SWD-background-color)
+  background: var(--SWD-background-color);
 }
 
 .tabs-control {
@@ -42,7 +42,6 @@
     color: var(--SWD-color-primary);
     border-block-end: max(0.25rem, 4px) solid var(--SWD-color-primary);
   }
-
 }
 
 .total {
@@ -60,7 +59,7 @@
   color: var(--SWD-background-color);
   background: var(--total-background, var(--SWD-text-color));
   transform: scale(var(--total-scale, 0.75));
-  transition: all .25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 
   :empty {
     --total-scale: 0;

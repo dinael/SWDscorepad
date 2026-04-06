@@ -12,7 +12,7 @@ const player2 = "";
 
 export const Scorepad: FC = () => {
   const { showAgora, showPantheon } = useGame();
-  
+
   const playerOne = player1.trim() === "" ? "Ludio I" : player1;
   const playerTwo = player2.trim() === "" ? "Ludio II" : player2;
 
@@ -29,6 +29,7 @@ export const Scorepad: FC = () => {
     progress: "",
     political: "",
   });
+  const [resetKey, setResetKey] = useState(0);
 
   const updateTotal1 = useCallback((newTotal: number) => {
     setTotal1(newTotal);
@@ -78,6 +79,7 @@ export const Scorepad: FC = () => {
     setIsTie(false);
     setActiveVictoryType("");
     setVictoryMessages({ military: "", progress: "", political: "" });
+    setResetKey((prev) => prev + 1);
   }, []);
 
   const inputReadOnly = !!winner;
@@ -85,7 +87,7 @@ export const Scorepad: FC = () => {
   const victoryDisabled = !!(winner || activeVictoryType);
 
   const btnDisabled = total1 === 0 && total2 === 0 && !activeVictoryType;
-  const btnStatus = (winner || isTie) ? reloadPage : handleCalculateClick;
+  const btnStatus = winner || isTie ? reloadPage : handleCalculateClick;
   const showReplay = winner || isTie;
 
   const resultMessage = useMemo(() => {
@@ -105,6 +107,7 @@ export const Scorepad: FC = () => {
         onTabChange={handleTabChange}
       >
         <SWDscorepad
+          key={`p1-${resetKey}`}
           name={playerOne}
           showAgora={showAgora}
           showPantheon={showPantheon}
@@ -112,6 +115,7 @@ export const Scorepad: FC = () => {
           readOnly={inputReadOnly}
         />
         <SWDscorepad
+          key={`p2-${resetKey}`}
           name={playerTwo}
           showAgora={showAgora}
           showPantheon={showPantheon}
@@ -139,7 +143,7 @@ export const Scorepad: FC = () => {
           </p>
         )}
         <button
-          className={`${styles.calculateBtn} ${showReplay ? styles.replay : ''}`}
+          className={`${styles.calculateBtn} ${showReplay ? styles.replay : ""}`}
           disabled={btnDisabled}
           id="calculate"
           onClick={btnStatus}

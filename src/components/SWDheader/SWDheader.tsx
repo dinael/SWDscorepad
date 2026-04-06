@@ -41,9 +41,7 @@ export const SWDheader: FC<SWDheaderProps> = ({
         </button>
         {menuOpen && (
           <nav className={styles.menu}>
-            <p className={styles.menuTitle}>
-              Expansions:
-            </p>
+            <p className={styles.menuTitle}>Expansions:</p>
             <label className={styles.menuItem}>
               <input
                 type="checkbox"

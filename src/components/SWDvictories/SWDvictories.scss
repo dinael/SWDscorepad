@@ -22,7 +22,9 @@
   cursor: pointer;
   color: var(--victory-btn-color, var(--SWD-text-color));
   background: var(--victory-btn-background);
-  transition: color 0.35s ease-in-out, background 0.35s ease-in-out;
+  transition:
+    color 0.35s ease-in-out,
+    background 0.35s ease-in-out;
 
   &:hover {
     --victory-btn-background: rgba(255, 255, 255, 0.1);

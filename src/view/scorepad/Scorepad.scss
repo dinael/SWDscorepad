@@ -35,7 +35,8 @@
     font-weight: 800;
     font-size: 2rem;
     border-radius: max(0.25rem, 4px);
-    border: max(0.125rem, 2px) solid var(--calculate-btn-border-color, var(--SWD-color-primary));
+    border: max(0.125rem, 2px) solid
+      var(--calculate-btn-border-color, var(--SWD-color-primary));
     color: var(--calculate-btn-color, var(--SWD-button-text-color));
     background: var(--calculate-btn-background, var(--SWD-color-primary));
     cursor: var(--calculate-btn-cursor, pointer);

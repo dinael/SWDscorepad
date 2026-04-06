@@ -19,7 +19,11 @@ export type SWDscorepadProps = {
 
 const getInputsToUse = (showAgora: boolean, showPantheon: boolean) => {
   if (!showAgora && !showPantheon) return initialInputs;
-  return [...initialInputs, ...(showAgora ? agoraInputs : []), ...(showPantheon ? pantheonInputs : [])];
+  return [
+    ...initialInputs,
+    ...(showAgora ? agoraInputs : []),
+    ...(showPantheon ? pantheonInputs : []),
+  ];
 };
 
 export const SWDscorepad: FC<SWDscorepadProps> = memo(
@@ -32,11 +36,15 @@ export const SWDscorepad: FC<SWDscorepadProps> = memo(
   }: SWDscorepadProps) => {
     const inputsToUse = useMemo(
       () => getInputsToUse(showAgora, showPantheon),
-      [showAgora, showPantheon]
+      [showAgora, showPantheon],
     );
 
     const [inputValues, setInputValues] = useState<{ [id: string]: string }>(
-      () => inputsToUse.reduce((acc, { id, value }) => ({ ...acc, [id]: value || '' }), {})
+      () =>
+        inputsToUse.reduce(
+          (acc, { id, value }) => ({ ...acc, [id]: value || "" }),
+          {},
+        ),
     );
 
     const total = useMemo(() => {
@@ -50,9 +58,9 @@ export const SWDscorepad: FC<SWDscorepadProps> = memo(
 
     const handleChange = useMemo(
       () => (id: string) => (event: ChangeEvent<HTMLInputElement>) => {
-        setInputValues(prev => ({ ...prev, [id]: event.target.value }));
+        setInputValues((prev) => ({ ...prev, [id]: event.target.value }));
       },
-      []
+      [],
     );
 
     onUpdateTotal(total);
@@ -60,9 +68,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = memo(
     return (
       <>
         <fieldset className={styles.SWDscorepad}>
-          <h2 className="SWDscorepad-player-name sr-only">
-            {name}'s scorepad
-          </h2>
+          <h2 className="SWDscorepad-player-name sr-only">{name}'s scorepad</h2>
           {initialInputs.map((input) => (
             <SWDinput
               key={input.id}
@@ -118,7 +124,7 @@ export const SWDscorepad: FC<SWDscorepadProps> = memo(
         </fieldset>
       </>
     );
-  }
+  },
 );
 
 export default SWDscorepad;
