@@ -1,0 +1,18 @@
+.swd-config {
+  --input-label-text-font-size: 1.5rem;
+  --input-label-text-font-family: var(--SWD-title-font-family);
+  --input-field-text-align: left;
+
+  display: grid;
+  margin: 0 auto;
+  max-inline-size: var(--SWD-wrapper-width);
+}
+
+.ludio-i,
+.ludio-ii {
+  text-align: left;
+}
+
+.ludio-ii {
+  margin-block-start: 2rem;
+}
