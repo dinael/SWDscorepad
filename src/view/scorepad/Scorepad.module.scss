@@ -10,7 +10,7 @@
   padding-block: 1rem;
   background: var(--SWD-background-color);
 
-  &-winner {
+  .calculateWinner {
     display: flex;
     gap: 0.25rem;
     text-transform: capitalize;
@@ -27,7 +27,7 @@
     }
   }
 
-  &-btn {
+  .calculateBtn {
     appearance: none;
     inline-size: 100%;
     block-size: 4rem;

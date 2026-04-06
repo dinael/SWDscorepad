@@ -1,11 +1,11 @@
 import { FC, useState, useCallback, useMemo } from "react";
 
 import styles from "./Scorepad.module.scss";
-import VP2 from "../assets/images/vp-2.svg";
-import SWDtabs from "../components/SWDtabs/SWDtabs";
-import SWDscorepad from "../components/SWDscorepad/SWDscorepad";
-import SWDvictories from "../components/SWDvictories/SWDvictories";
-import { useGame } from "../context/GameContext";
+import VP2 from "../../assets/images/vp-2.svg";
+import SWDtabs from "../../components/SWDtabs/SWDtabs";
+import SWDscorepad from "../../components/SWDscorepad/SWDscorepad";
+import SWDvictories from "../../components/SWDvictories/SWDvictories";
+import { useGame } from "../../context/GameContext";
 
 const player1 = "";
 const player2 = "";
