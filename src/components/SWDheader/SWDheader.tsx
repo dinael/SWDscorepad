@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useRef, useEffect } from "react";
 import { useGame } from "../../context/GameContext";
 import styles from "./SWDheader.module.scss";
 
@@ -10,14 +10,27 @@ export const SWDheader: FC<SWDheaderProps> = ({
   title = "7 Wonder duel scorepad",
 }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
   const { showAgora, showPantheon, toggleAgora, togglePantheon } = useGame();
 
-  const toggleMenu = () => setMenuOpen(prev => !prev);
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    if (menuOpen) {
+      document.addEventListener("click", handleClickOutside);
+      return () => document.removeEventListener("click", handleClickOutside);
+    }
+  }, [menuOpen]);
 
   return (
     <header className={styles.wrapper}>
       <h1 className={styles.title}>{title}</h1>
-      <div className={styles.menuContainer}>
+      <div className={styles.menuContainer} ref={menuRef}>
         <button
           className={styles.menuButton}
           onClick={toggleMenu}
@@ -28,7 +41,9 @@ export const SWDheader: FC<SWDheaderProps> = ({
         </button>
         {menuOpen && (
           <nav className={styles.menu}>
-            <p>Expansions:</p>
+            <p className={styles.menuTitle}>
+              Expansions:
+            </p>
             <label className={styles.menuItem}>
               <input
                 type="checkbox"

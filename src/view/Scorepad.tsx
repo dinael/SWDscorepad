@@ -72,7 +72,12 @@ export const Scorepad: FC = () => {
   }, [total1, total2, playerOne, playerTwo]);
 
   const reloadPage = useCallback(() => {
-    window.location.reload();
+    setTotal1(0);
+    setTotal2(0);
+    setWinner(null);
+    setIsTie(false);
+    setActiveVictoryType("");
+    setVictoryMessages({ military: "", progress: "", political: "" });
   }, []);
 
   const inputReadOnly = !!winner;
