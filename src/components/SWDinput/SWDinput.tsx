@@ -11,6 +11,9 @@ export type SWDinputProps = {
   maxLength?: number;
   image?: string;
   readOnly?: boolean;
+  className?: string;
+  showLabel?: boolean;
+  variant?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 export const SWDinput: FC<SWDinputProps> = memo(
@@ -23,6 +26,9 @@ export const SWDinput: FC<SWDinputProps> = memo(
     maxLength = 2,
     image,
     readOnly = false,
+    className,
+    showLabel = true,
+    variant,
     onChange,
   }: SWDinputProps) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,17 +47,19 @@ export const SWDinput: FC<SWDinputProps> = memo(
     const pattern = type === "number" ? "\\d*" : undefined;
 
     return (
-      <label className={styles.inputWrapper} htmlFor={id}>
+      <label className={`${styles.inputWrapper} ${className || ""}`} htmlFor={id}>
         {image && (
           <span className={styles.inputImageWrapper}>
             <img className="" src={image} alt={label} aria-hidden="true" />
           </span>
         )}
-        <span className={styles.inputLabelText} id={`label-${id}`}>
-          {label}
-        </span>
+        {showLabel && (
+          <span className={styles.inputLabelText} id={`label-${id}`}>
+            {label}
+          </span>
+        )}
         <input
-          className={styles.inputField}
+          className={`${styles.inputField} ${variant === "vertical" ? styles.vertical : ""}`}
           type={type}
           pattern={pattern}
           id={id}

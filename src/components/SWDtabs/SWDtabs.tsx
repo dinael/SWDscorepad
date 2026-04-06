@@ -8,6 +8,7 @@ export type SWDtabsProps = {
   total1: number
   total2: number
   children: ReactNode
+  activeTab?: string
   onTabChange: (activeTab: string) => void
 }
 
@@ -17,9 +18,12 @@ export const SWDtabs: FC<SWDtabsProps> = ({
   total1,
   total2,
   children,
+  activeTab: externalActiveTab,
   onTabChange,
 }: SWDtabsProps) => {
-  const [activeTab, setActiveTab] = useState(tabName1)
+  const [internalActiveTab, setInternalActiveTab] = useState(tabName1)
+  const activeTab = externalActiveTab ?? internalActiveTab
+  const setActiveTab = externalActiveTab ? () => {} : setInternalActiveTab
 
   const statusTabs1 = activeTab === tabName1 ? 'active' : ''
   const statusTabs2 = activeTab === tabName2 ? 'active' : ''
