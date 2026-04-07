@@ -1,8 +1,22 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 import { render } from "./testUtils";
 import { Scorepad } from "../view/scorepad/Scorepad";
 import { fireEvent } from "@testing-library/react";
+
+vi.mock("../context/GameContext", async () => {
+  const actual = await vi.importActual("../context/GameContext");
+  return {
+    ...actual,
+    useGame: () => ({
+      showAgora: true,
+      showPantheon: false,
+      toggleAgora: () => {},
+      togglePantheon: () => {},
+      language: "en",
+    }),
+  };
+});
 
 describe("Scorepad - Replay", () => {
   it("resets inputs when Replay is clicked", async () => {
@@ -80,7 +94,7 @@ describe("Scorepad - Edge Cases", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/Military Victory to Player 1/),
+        screen.getByText(/military victory to Player 1/i),
       ).toBeInTheDocument();
     });
   });
@@ -92,7 +106,7 @@ describe("Scorepad - Edge Cases", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/Progress Victory to Player 1/),
+        screen.getByText(/progress victory to Player 1/i),
       ).toBeInTheDocument();
     });
   });
@@ -104,7 +118,7 @@ describe("Scorepad - Edge Cases", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText(/Political Victory to Player 1/),
+        screen.getByText(/political victory to Player 1/i),
       ).toBeInTheDocument();
     });
   });
