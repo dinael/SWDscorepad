@@ -1,4 +1,4 @@
-import { FC, useState, useRef } from "react";
+import { FC, useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useGame } from "../../context/GameContext";
 import styles from "./SWDheader.module.scss";
@@ -14,6 +14,20 @@ export const SWDheader: FC<SWDheaderProps> = ({
   const menuRef = useRef<HTMLDivElement>(null);
   const { showAgora, showPantheon, toggleAgora, togglePantheon } = useGame();
   const { i18n, t } = useTranslation();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+    if (menuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuOpen]);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 

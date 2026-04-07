@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import { render } from "./testUtils";
 import { SWDheader } from "../components/SWDheader/SWDheader";
 
@@ -22,5 +22,16 @@ describe("SWDheader", () => {
   it("renders header element", () => {
     render(<SWDheader />);
     expect(screen.getByRole("banner")).toBeInTheDocument();
+  });
+
+  it("closes menu when clicking outside", async () => {
+    render(<SWDheader />);
+    const menuButton = screen.getByLabelText("Menu");
+
+    fireEvent.click(menuButton);
+    expect(screen.getByText("Expansions:")).toBeInTheDocument();
+
+    fireEvent.mouseDown(document.body);
+    expect(screen.queryByText("Expansions:")).not.toBeInTheDocument();
   });
 });
