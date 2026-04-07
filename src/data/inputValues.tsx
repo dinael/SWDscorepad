@@ -3,6 +3,7 @@ import cardBlue from "../assets/images/card-blue.svg";
 import cardGreen from "../assets/images/card-green.svg";
 import cardYellow from "../assets/images/card-yellow.svg";
 import cardPurple from "../assets/images/card-purple.svg";
+import cardPurpleAgora from "../assets/images/card-purple-agora.svg";
 import cardWhite from "../assets/images/card-white.svg";
 import wonders from "../assets/images/wonders.svg";
 import progress from "../assets/images/progress.svg";
@@ -16,7 +17,7 @@ export type InputItem = {
   label: string;
   id: string;
   value: string;
-  image: string;
+  image: string | { default: string; agora: string };
   placeholder: string;
 };
 
@@ -31,79 +32,79 @@ export const calculateTotal = (
 
 export const initialInputs: InputItem[] = [
   {
-    label: "Blue Cards",
-    id: "input2",
-    value: "",
-    placeholder: "VP in blue cards",
-    image: cardBlue,
-  },
-  {
-    label: "Green Cards",
-    id: "input3",
-    value: "",
-    placeholder: "VP in green cards",
-    image: cardGreen,
-  },
-  {
-    label: "Yellow Cards",
-    id: "input4",
-    value: "",
-    placeholder: "VP in yellow cards",
-    image: cardYellow,
-  },
-  {
-    label: "Purple Cards",
-    id: "input5",
-    value: "",
-    placeholder: "VP in purple cards",
-    image: cardPurple,
-  },
-  {
-    label: "Wonders",
+    label: "wonders",
     id: "input1",
     value: "",
-    placeholder: "VP in Wonders cards",
+    placeholder: "vpInWonders",
     image: wonders,
   },
   {
-    label: "Progress",
+    label: "blueCards",
+    id: "input2",
+    value: "",
+    placeholder: "vpInBlueCards",
+    image: cardBlue,
+  },
+  {
+    label: "greenCards",
+    id: "input3",
+    value: "",
+    placeholder: "vpInGreenCards",
+    image: cardGreen,
+  },
+  {
+    label: "yellowCards",
+    id: "input4",
+    value: "",
+    placeholder: "vpInYellowCards",
+    image: cardYellow,
+  },
+  {
+    label: "purpleCards",
+    id: "input5",
+    value: "",
+    placeholder: "vpInPurpleCards",
+    image: { default: cardPurple, agora: cardPurpleAgora },
+  },
+  {
+    label: "progress",
     id: "input7",
     value: "",
-    placeholder: "VP in progress tiles",
+    placeholder: "vpInProgressTiles",
     image: progress,
   },
   {
-    label: "Coins",
+    label: "coins",
     id: "input9",
     value: "",
-    placeholder: "1 VP for each 3 coins",
+    placeholder: "vpForEach3Coins",
     image: coins,
   },
   {
-    label: "Military",
+    label: "military",
     id: "input8",
     value: "",
-    placeholder: "Military's VP",
+    placeholder: "militaryVP",
     image: military,
   },
 ];
 
 export const agoraInputs: InputItem[] = [
   {
-    label: "Chambers",
+    label: "chambers",
     id: "inputAgora1",
     value: "",
-    placeholder: "VP chamber",
+    placeholder: "vpChamber",
     image: chamber,
   },
 ];
 
 export const pantheonInputs: InputItem[] = [
   {
-    label: "Divinity cards",
+    label: "divinityCards",
     id: "inputPantheon1",
     value: "",
-    placeholder: "VP in divinities cards",
+    placeholder: "vpInDivinities",
     image: cardWhite,
   },
 ];

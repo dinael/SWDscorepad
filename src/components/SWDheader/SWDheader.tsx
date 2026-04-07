@@ -1,4 +1,5 @@
-import { FC, useState, useRef, useEffect } from "react";
+import { FC, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useGame } from "../../context/GameContext";
 import styles from "./SWDheader.module.scss";
 
@@ -12,20 +13,11 @@ export const SWDheader: FC<SWDheaderProps> = ({
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { showAgora, showPantheon, toggleAgora, togglePantheon } = useGame();
+  const { i18n, t } = useTranslation();
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setMenuOpen(false);
-      }
-    };
-    if (menuOpen) {
-      document.addEventListener("click", handleClickOutside);
-      return () => document.removeEventListener("click", handleClickOutside);
-    }
-  }, [menuOpen]);
+  const languages = ["la", "en", "es"];
 
   return (
     <header className={styles.wrapper}>
@@ -41,14 +33,14 @@ export const SWDheader: FC<SWDheaderProps> = ({
         </button>
         {menuOpen && (
           <nav className={styles.menu}>
-            <p className={styles.menuTitle}>Expansions:</p>
+            <p className={styles.menuTitle}>{t("expansions")}:</p>
             <label className={styles.menuItem}>
               <input
                 type="checkbox"
                 checked={showAgora}
                 onChange={toggleAgora}
               />
-              <span>Agora</span>
+              <span>{t("agora")}</span>
             </label>
             <label className={styles.menuItem}>
               <input
@@ -56,8 +48,21 @@ export const SWDheader: FC<SWDheaderProps> = ({
                 checked={showPantheon}
                 onChange={togglePantheon}
               />
-              <span>Pantheon</span>
+              <span>{t("pantheon")}</span>
             </label>
+            <p className={styles.menuTitle}>{t("language")}:</p>
+            {languages.map((lang) => (
+              <label key={lang} className={styles.menuItem}>
+                <input
+                  type="radio"
+                  name="language"
+                  value={lang}
+                  checked={i18n.language === lang}
+                  onChange={() => i18n.changeLanguage(lang)}
+                />
+                <span>{lang.toUpperCase()}</span>
+              </label>
+            ))}
           </nav>
         )}
       </div>

@@ -1,18 +1,26 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-// import Home from '../view/Home'
-import Scorepad from "../view/Scorepad";
-// import NotFound from '../view/NotFound'
+import Scorepad from "../view/scorepad/Scorepad";
+import Splash from "../view/splash/Splash";
+import ErrorPage from "../view/ErrorPage";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Scorepad />,
   },
-  // {
-  //   path: "*",
-  //   element: <NotFound />,
-  // }
+  {
+    path: "/scorepad",
+    element: <Scorepad />,
+  },
+  {
+    path: "/splash",
+    element: <Splash />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
 ]);
 
 const Router = () => <RouterProvider router={routes} />;

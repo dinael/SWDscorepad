@@ -1,4 +1,5 @@
 import { FC, ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 
 import "./SWDconfig.scss";
 
@@ -25,13 +26,16 @@ const SWDconfig: FC<SWDConfigProps> = ({
   handleAgoraChange,
   handlePantheonChange,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <section className="swd-config">
-      <h2>Player names</h2>
+      <h2>{t("playerNames")}</h2>
       <SWDinput
         className="ludio-i"
         id={"player1"}
-        label={"Ludio I"}
+        label={t("player1")}
+        placeholder={t("enterName")}
         type="text"
         showLabel
         variant={"vertical"}
@@ -42,7 +46,8 @@ const SWDconfig: FC<SWDConfigProps> = ({
       <SWDinput
         className="ludio-ii"
         id={"player2"}
-        label={"Ludio II"}
+        label={t("player2")}
+        placeholder={t("enterName")}
         type="text"
         showLabel
         variant={"vertical"}
@@ -51,9 +56,9 @@ const SWDconfig: FC<SWDConfigProps> = ({
         onChange={handlePlayer2Change}
       />
       <div className="config-expansions">
-        <h2>Expansions</h2>
+        <h2>{t("expansions")}</h2>
         <label>
-          Agora
+          {t("agora")}
           <input
             className="btn-check check-agora"
             type="checkbox"
@@ -63,7 +68,7 @@ const SWDconfig: FC<SWDConfigProps> = ({
           />
         </label>
         <label>
-          Pantheon
+          {t("pantheon")}
           <input
             className="btn-check check-pantheon"
             type="checkbox"
