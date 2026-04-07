@@ -60,7 +60,7 @@ export const Scorepad: FC = () => {
         return;
       }
 
-      const message = `${type} victory to ${tabActive}`;
+      const message = t("victoryTo", { type, player: tabActive });
       setVictoryMessages({ ...victoryMessages, [type]: message });
       setActiveVictoryType(type);
       setWinner(tabActive);
@@ -103,10 +103,10 @@ export const Scorepad: FC = () => {
 
   const resultMessage = useMemo(() => {
     if (activeVictoryType) return victoryMessages[activeVictoryType];
-    if (isTie) return "It's a tie!";
-    if (winner) return `The winner is ${winner}`;
+    if (isTie) return t("itsATie");
+    if (winner) return t("theWinnerIs", { winner });
     return null;
-  }, [activeVictoryType, isTie, winner, victoryMessages]);
+  }, [activeVictoryType, isTie, winner, victoryMessages, t]);
 
   return (
     <section className={styles.scorepad}>
