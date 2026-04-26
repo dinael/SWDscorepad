@@ -1,27 +1,46 @@
-import { FC } from "react";
+import { FC, memo, useMemo } from "react";
 import styles from "./SWDfooter.module.scss";
 
 export type SWDfooterProps = {
   title?: string;
+  name?: string;
+  text?: string;
+  symbol?: string;
+  loading?: boolean;
 };
 
-export const SWDfooter: FC<SWDfooterProps> = ({
-  title = "",
-}: SWDfooterProps) => {
-  return (
-    <footer className={styles.wrapper}>
-      <p className={styles.title}>
-        {title}
-        {/* <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.amazon.es/gp/search?ie=UTF8&tag=dinael-21&linkCode=ur2&linkId=766589dbada7e94d9716b44141e8cb31&camp=3638&creative=24630&index=toys&keywords=7 wonder duel"
-        >
-          Compra 7 wonder duel, sus expansiones y muchos más juegos de mesa
-        </a> */}
-      </p>
-    </footer>
-  );
-};
+export const SWDfooter: FC<SWDfooterProps> = memo(
+  ({
+    title = "",
+    name = "SWDscorepad",
+    text = "All rights reserved",
+    symbol = "\u00A9",
+    loading = false,
+  }: SWDfooterProps) => {
+    const currentYear = new Date().getFullYear();
+
+    const copyrightClassName = useMemo(
+      () =>
+        [styles["copyright"], loading && styles["is-loading"]]
+          .filter(Boolean)
+          .join(" "),
+      [loading],
+    );
+
+    return (
+      <footer className={styles.wrapper}>
+        {title && <p className={styles.title}>{title}</p>}
+        <p className={copyrightClassName}>
+          {symbol && (
+            <span className={styles["copyright-symbol"]}>{symbol}</span>
+          )}{" "}
+          <span className={styles["copyright-text"]}>
+            {currentYear} {name} {text}.
+          </span>
+        </p>
+      </footer>
+    );
+  },
+);
 
 export default SWDfooter;

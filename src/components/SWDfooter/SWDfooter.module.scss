@@ -1,9 +1,24 @@
 .wrapper {
   display: flex;
-
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   justify-content: center;
 }
 
 .title {
   font-size: 1rem;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  padding-block: 1lh;
+}
+
+.copyright-symbol {
+  margin-right: 0.25rem;
+}
+
+.is-loading {
+  opacity: 0.5;
 }
