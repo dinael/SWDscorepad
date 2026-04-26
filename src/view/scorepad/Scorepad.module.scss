@@ -1,26 +1,32 @@
 .scorepad {
   display: grid;
-  margin: 0 auto;
   max-inline-size: 35rem;
+  margin: 0 auto;
 }
 
 .calculate {
   position: sticky;
   inset-block-end: 0;
+
   padding-block: 1rem;
-  background: var(--SWD-background-color);
+
+  background: var(--swd-background-color);
 }
 
 .calculateWinner {
   display: flex;
-  gap: 0.25rem;
-  text-transform: capitalize;
-  align-items: center;
-  justify-content: center;
   padding-block: 0.5em;
+
   border-radius: max(0.25rem, 4px);
-  color: var(--SWD-button-text-color);
+
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+
   background: hsl(120, 100%, 80%);
+
+  color: var(--swd-button-text-color);
+  text-transform: capitalize;
 
   img {
     block-size: 1.5rem;
@@ -29,25 +35,29 @@
 }
 
 .calculateBtn {
-  appearance: none;
-  inline-size: 100%;
   block-size: 4rem;
-  font-family: var(--SWD-title-font-family);
-  font-weight: 800;
-  font-size: 2rem;
-  border-radius: max(0.25rem, 4px);
+  inline-size: 100%;
   border: max(0.125rem, 2px) solid
-    var(--calculate-btn-border-color, var(--SWD-color-primary));
-  color: var(--calculate-btn-color, var(--SWD-button-text-color));
-  background: var(--calculate-btn-background, var(--SWD-color-primary));
+    var(--calculate-btn-border-color, var(--swd-color-primary));
+
+  border-radius: max(0.25rem, 4px);
+
+  background: var(--calculate-btn-background, var(--swd-color-primary));
+
+  color: var(--calculate-btn-color, var(--swd-button-text-color));
+  font-family: var(--swd-title-font-family);
+  font-size: 2rem;
+  font-weight: 800;
+
+  appearance: none;
 
   &.replay {
-    --calculate-btn-color: var(--SWD-color-primary);
-    --calculate-btn-background: var(--SWD-button-text-color);
+    --calculate-btn-color: var(--swd-color-primary);
+    --calculate-btn-background: var(--swd-button-text-color);
   }
 
   &:disabled {
-    --calculate-btn-border-color: var(--SWD-color-disabled-color, gray);
-    --calculate-btn-background: var(--SWD-color-disabled-background, gray);
+    --calculate-btn-border-color: var(--swd-color-disabled-color, gray);
+    --calculate-btn-background: var(--swd-color-disabled-background, gray);
   }
 }

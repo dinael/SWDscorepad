@@ -1,44 +1,52 @@
 .victoryBar {
   display: flex;
+  padding-block: 2rem 1rem;
+  padding-inline: 1rem;
+
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  padding-inline: 1rem;
-  padding-block: 2rem 1rem;
 }
 
 .victoryBtn {
-  appearance: none;
-  font-family: var(--SWD-title-font-family);
-  font-size: 1rem;
-  font-weight: 800;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: 0.5rem;
   border: none;
+
   border-radius: max(0.5rem, 8px);
-  cursor: pointer;
-  color: var(--victory-btn-color, var(--SWD-text-color));
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   background: var(--victory-btn-background);
+
+  color: var(--victory-btn-color, var(--swd-text-color));
+  font-family: var(--swd-title-font-family);
+  font-size: 1rem;
+  font-weight: 800;
+
   transition:
     color 0.35s ease-in-out,
     background 0.35s ease-in-out;
+
+  cursor: pointer;
+  appearance: none;
 
   &:hover {
     --victory-btn-background: rgba(255, 255, 255, 0.1);
   }
 
   &:disabled {
-    --victory-btn-color: var(--SWD-button-text-color);
+    --victory-btn-color: var(--swd-button-text-color);
+    background: rgba(255, 255, 255, 0.1);
 
     cursor: default;
     pointer-events: none;
-    background: rgba(255, 255, 255, 0.1);
 
     .victorySymbol {
       filter: grayscale(1);
+
       opacity: 0.5;
     }
   }
@@ -64,7 +72,7 @@
 }
 
 .political {
-  --victory-btn-color: var(--SWD-button-text-color);
+  --victory-btn-color: var(--swd-button-text-color);
   --victory-btn-background: hsl(0, 0%, 80%);
 
   &:hover {
