@@ -14,7 +14,7 @@ export const LanguageSwitcher: FC = () => {
       style={{
         background: "none",
         border: "none",
-        color: "var(--SWD-color-primary)",
+        color: "var(--swd-color-primary)",
         cursor: "pointer",
         fontSize: "0.875rem",
         padding: "0.5rem",

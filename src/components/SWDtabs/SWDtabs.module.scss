@@ -6,62 +6,80 @@
 .tabsBar {
   position: sticky;
   inset-block-start: 0;
+
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
   margin-block-end: 2rem;
-  border-block-end: max(0.0625rem, 1px) solid var(--SWD-color-primary);
-  background: var(--SWD-background-color);
+  border-block-end: max(0.0625rem, 1px) solid var(--swd-color-primary);
+
+  width: 100%;
+
+  justify-content: center;
+  align-items: center;
+
+  background: var(--swd-background-color);
 }
 
 .tabsControl {
-  appearance: none;
   position: relative;
-  font-family: var(--SWD-title-font-family);
-  font-size: 2rem;
+
   display: block;
-  text-align: center;
-  flex: 1 1 100%;
-  max-inline-size: 20rem;
   block-size: 4rem;
-  color: var(--SWD-text-color-opacity);
-  background: none;
+  max-inline-size: 20rem;
+  padding: 0 1rem;
   border: none;
-  cursor: pointer;
+
   overflow: hidden;
+
+  flex: 1 1 100%;
+
+  background: none;
+
+  color: var(--swd-text-color-opacity);
+  font-family: var(--swd-title-font-family);
+  font-size: 2rem;
+  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
-  padding: 0 1rem;
+
+  cursor: pointer;
+  appearance: none;
 
   &.active {
-    --total-background: var(--SWD-color-primary);
+    --total-background: var(--swd-color-primary);
     --total-scale: 1;
-    color: var(--SWD-color-primary);
-    border-block-end: max(0.25rem, 4px) solid var(--SWD-color-primary);
+    border-block-end: max(0.25rem, 4px) solid var(--swd-color-primary);
+
+    color: var(--swd-color-primary);
   }
 }
 
 .total {
   position: absolute;
-  inset-inline-end: 0.5rem;
   inset-block-start: 0.25rem;
+  inset-inline-end: 0.5rem;
+
   display: flex;
+  block-size: 2rem;
+  inline-size: 2rem;
+  border: max(0.25rem, 4px) solid var(--swd-background-color);
+
+  border-radius: 16rem;
+
   justify-content: center;
   align-items: center;
+
+  background: var(--total-background, var(--swd-text-color));
+
+  color: var(--swd-background-color);
   font-size: 1rem;
-  inline-size: 2rem;
-  block-size: 2rem;
-  border-radius: 16rem;
-  border: max(0.25rem, 4px) solid var(--SWD-background-color);
-  color: var(--SWD-background-color);
-  background: var(--total-background, var(--SWD-text-color));
+
   transform: scale(var(--total-scale, 0.75));
+
   transition: all 0.25s ease-in-out;
 }
 
 .tabsContainer {
-  padding-inline: 2rem;
+  padding-inline: 1rem;
 }
 
 .tabContent {
