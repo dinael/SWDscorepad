@@ -1,0 +1,63 @@
+.scorepad {
+  display: grid;
+  max-inline-size: 35rem;
+  margin: 0 auto;
+}
+
+.calculate {
+  position: sticky;
+  inset-block-end: 0;
+
+  padding-block: 1rem;
+
+  background: var(--swd-background-color);
+}
+
+.calculateWinner {
+  display: flex;
+  padding-block: 0.5em;
+
+  border-radius: max(0.25rem, 4px);
+
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+
+  background: hsl(120, 100%, 80%);
+
+  color: var(--swd-button-text-color);
+  text-transform: capitalize;
+
+  img {
+    block-size: 1.5rem;
+    inline-size: 1.5rem;
+  }
+}
+
+.calculateBtn {
+  block-size: 4rem;
+  inline-size: 100%;
+  border: max(0.125rem, 2px) solid
+    var(--calculate-btn-border-color, var(--swd-color-primary));
+
+  border-radius: max(0.25rem, 4px);
+
+  background: var(--calculate-btn-background, var(--swd-color-primary));
+
+  color: var(--calculate-btn-color, var(--swd-button-text-color));
+  font-family: var(--swd-title-font-family);
+  font-size: 2rem;
+  font-weight: 800;
+
+  appearance: none;
+
+  &.replay {
+    --calculate-btn-color: var(--swd-color-primary);
+    --calculate-btn-background: var(--swd-button-text-color);
+  }
+
+  &:disabled {
+    --calculate-btn-border-color: var(--swd-color-disabled-color, gray);
+    --calculate-btn-background: var(--swd-color-disabled-background, gray);
+  }
+}
