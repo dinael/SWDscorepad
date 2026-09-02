@@ -4,6 +4,7 @@ import {
   useState,
   useCallback,
   useEffect,
+  useMemo,
   ReactNode,
 } from "react";
 import { useTranslation } from "react-i18next";
@@ -42,10 +43,13 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
     setShowPantheon((prev) => !prev);
   }, []);
 
+  const value = useMemo(
+    () => ({ showAgora, showPantheon, toggleAgora, togglePantheon, language }),
+    [showAgora, showPantheon, toggleAgora, togglePantheon, language],
+  );
+
   return (
-    <GameContext.Provider
-      value={{ showAgora, showPantheon, toggleAgora, togglePantheon, language }}
-    >
+    <GameContext.Provider value={value}>
       {children}
     </GameContext.Provider>
   );

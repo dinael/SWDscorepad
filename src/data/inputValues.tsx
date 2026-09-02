@@ -21,8 +21,25 @@ export type InputItem = {
   placeholder: string;
 };
 
-export const inputsToValues = (inputs: InputItem[]): { [id: string]: string } =>
-  inputs.reduce((acc, { id, value }) => ({ ...acc, [id]: value || "" }), {});
+export const inputsToValues = (inputs: InputItem[]): { [id: string]: string } => {
+  const result: { [id: string]: string } = {};
+  for (const { id, value } of inputs) {
+    result[id] = value || "";
+  }
+  return result;
+};
+
+export const getInputsToUse = (
+  showAgora: boolean,
+  showPantheon: boolean,
+): InputItem[] => {
+  if (!showAgora && !showPantheon) return initialInputs;
+  return [
+    ...initialInputs,
+    ...(showAgora ? agoraInputs : []),
+    ...(showPantheon ? pantheonInputs : []),
+  ];
+};
 
 export const calculateTotal = (
   values: { [id: string]: string },

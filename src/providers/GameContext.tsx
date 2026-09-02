@@ -1,4 +1,11 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 
 export type GameData = {
   player1: string;
@@ -27,41 +34,55 @@ interface GameProviderProps {
   children: React.ReactNode;
 }
 
+const initialGameData: GameData = {
+  player1: "",
+  player2: "",
+  showAgora: false,
+  showPantheon: false,
+  showSolo: false,
+};
+
+type GameAction = { type: "update"; config: GameData };
+
+const gameReducer = (state: GameData, action: GameAction): GameData => {
+  switch (action.type) {
+    case "update":
+      return action.config;
+    default:
+      return state;
+  }
+};
+
 export function GameProvider({ children }: GameProviderProps) {
-  const [player1, setPlayer1] = useState("");
-  const [player2, setPlayer2] = useState("");
-  const [showAgora, setShowAgora] = useState(false);
-  const [showPantheon, setShowPantheon] = useState(false);
-  const [showSolo, setShowSolo] = useState(false);
+  const [gameData, dispatch] = useReducer(gameReducer, initialGameData);
 
   useEffect(() => {
     const storedPlayer1 = localStorage.getItem("player1");
     const storedPlayer2 = localStorage.getItem("player2");
 
     if (storedPlayer1 && storedPlayer2) {
-      setPlayer1(storedPlayer1);
-      setPlayer2(storedPlayer2);
+      dispatch({
+        type: "update",
+        config: {
+          ...initialGameData,
+          player1: storedPlayer1,
+          player2: storedPlayer2,
+        },
+      });
     }
   }, []);
 
-  const updateGameConfig = (newConfig: GameData) => {
-    setPlayer1(newConfig.player1);
-    setPlayer2(newConfig.player2);
-    setShowAgora(newConfig.showAgora);
-    setShowPantheon(newConfig.showPantheon);
-    setShowSolo(newConfig.showSolo);
-  };
+  const updateGameConfig = useCallback((newConfig: GameData) => {
+    dispatch({ type: "update", config: newConfig });
+  }, []);
 
-  const gameData: GameData = {
-    player1,
-    player2,
-    showAgora,
-    showPantheon,
-    showSolo,
-  };
+  const contextValue = useMemo(
+    () => ({ gameData, updateGameConfig }),
+    [gameData, updateGameConfig],
+  );
 
   return (
-    <GameContext.Provider value={{ gameData, updateGameConfig }}>
+    <GameContext.Provider value={contextValue}>
       {children}
     </GameContext.Provider>
   );

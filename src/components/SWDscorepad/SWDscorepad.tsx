@@ -1,11 +1,6 @@
-import { useState, ChangeEvent, FC, useMemo, useEffect } from "react";
+import { ChangeEvent, FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  initialInputs,
-  agoraInputs,
-  pantheonInputs,
-  InputItem,
-} from "../../data/inputValues";
+import { getInputsToUse } from "../../data/inputValues";
 
 import styles from "./SWDscorepad.module.scss";
 
@@ -16,19 +11,8 @@ export type SWDscorepadProps = {
   showAgora?: boolean;
   showPantheon?: boolean;
   readOnly?: boolean;
-  onUpdateTotal: (total: number) => void;
-};
-
-const getInputsToUse = (
-  showAgora: boolean,
-  showPantheon: boolean,
-): InputItem[] => {
-  if (!showAgora && !showPantheon) return initialInputs;
-  return [
-    ...initialInputs,
-    ...(showAgora ? agoraInputs : []),
-    ...(showPantheon ? pantheonInputs : []),
-  ];
+  inputValues: { [id: string]: string };
+  onChange: (id: string, value: string) => void;
 };
 
 export const SWDscorepad: FC<SWDscorepadProps> = ({
@@ -36,46 +20,21 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
   showAgora = false,
   showPantheon = false,
   readOnly,
-  onUpdateTotal,
+  inputValues,
+  onChange,
 }: SWDscorepadProps) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const inputsToUse = useMemo(
     () => getInputsToUse(showAgora, showPantheon),
-    [showAgora, showPantheon, i18n.language],
+    [showAgora, showPantheon],
   );
-
-  const [inputValues, setInputValues] = useState<{ [id: string]: string }>(() =>
-    inputsToUse.reduce(
-      (acc, { id, value }) => ({ ...acc, [id]: value || "" }),
-      {},
-    ),
-  );
-
-  useEffect(() => {
-    const newValues: { [id: string]: string } = {};
-    for (const input of inputsToUse) {
-      newValues[input.id] = "";
-    }
-    setInputValues(newValues);
-  }, [inputsToUse, showAgora]);
-
-  const total = useMemo(() => {
-    let sum = 0;
-    for (let i = 0; i < inputsToUse.length; i++) {
-      const value = parseFloat(inputValues[inputsToUse[i].id]) || 0;
-      sum += value;
-    }
-    return sum;
-  }, [inputValues, inputsToUse]);
 
   const handleChange = useMemo(
     () => (id: string) => (event: ChangeEvent<HTMLInputElement>) => {
-      setInputValues((prev) => ({ ...prev, [id]: event.target.value }));
+      onChange(id, event.target.value);
     },
-    [],
+    [onChange],
   );
-
-  onUpdateTotal(total);
 
   const initialInputsFiltered = inputsToUse.filter(
     (i) => !i.id.startsWith("inputAgora") && !i.id.startsWith("inputPantheon"),
@@ -152,9 +111,6 @@ export const SWDscorepad: FC<SWDscorepadProps> = ({
             ))}
           </>
         )}
-        <output className={styles.srOnlyOutput} aria-hidden="true">
-          {t("total")}: {total}
-        </output>
       </fieldset>
     </>
   );

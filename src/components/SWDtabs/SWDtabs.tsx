@@ -1,4 +1,4 @@
-import { ReactNode, useState, FC, Children, useEffect } from "react";
+import { ReactNode, useState, FC, Children } from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./SWDtabs.module.scss";
@@ -24,10 +24,6 @@ export const SWDtabs: FC<SWDtabsProps> = ({
 }: SWDtabsProps) => {
   const { t } = useTranslation();
   const [internalActiveTab, setInternalActiveTab] = useState(tabName1);
-
-  useEffect(() => {
-    setInternalActiveTab(tabName1);
-  }, [tabName1]);
 
   const activeTab = externalActiveTab ?? internalActiveTab;
   const setActiveTab = externalActiveTab ? () => {} : setInternalActiveTab;

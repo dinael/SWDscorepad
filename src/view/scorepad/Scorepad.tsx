@@ -1,4 +1,12 @@
-import { FC, useState, useCallback, useMemo, useEffect } from "react";
+import {
+  FC,
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  useRef,
+  useReducer,
+} from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./Scorepad.module.scss";
@@ -7,9 +15,77 @@ import SWDtabs from "../../components/SWDtabs/SWDtabs";
 import SWDscorepad from "../../components/SWDscorepad/SWDscorepad";
 import SWDvictories from "../../components/SWDvictories/SWDvictories";
 import { useGame } from "../../context/GameContext";
+import { getInputsToUse, InputItem } from "../../data/inputValues";
 
 const player1 = "";
 const player2 = "";
+
+type ScoreValues = { [id: string]: string };
+
+const buildInitialValues = (inputs: InputItem[]): ScoreValues => {
+  const obj: ScoreValues = {};
+  for (const { id, value } of inputs) {
+    obj[id] = value || "";
+  }
+  return obj;
+};
+
+const calculateTotal = (values: ScoreValues, inputs: InputItem[]): number => {
+  let sum = 0;
+  for (const { id } of inputs) {
+    sum += parseFloat(values[id]) || 0;
+  }
+  return sum;
+};
+
+type VictoryMessages = { [key: string]: string };
+
+type ResultState = {
+  winner: string | null;
+  isTie: boolean;
+  activeVictoryType: string;
+  victoryMessages: VictoryMessages;
+};
+
+type ResultAction =
+  | {
+      type: "victory";
+      victoryType: string;
+      player: string;
+      message: string;
+    }
+  | { type: "calculate"; winner: string | null; isTie: boolean }
+  | { type: "reset" };
+
+const initialResultState: ResultState = {
+  winner: null,
+  isTie: false,
+  activeVictoryType: "",
+  victoryMessages: { military: "", progress: "", political: "" },
+};
+
+const resultReducer = (state: ResultState, action: ResultAction): ResultState => {
+  switch (action.type) {
+    case "victory": {
+      if (state.activeVictoryType !== "") return state;
+      return {
+        ...state,
+        activeVictoryType: action.victoryType,
+        winner: action.player,
+        victoryMessages: {
+          ...state.victoryMessages,
+          [action.victoryType]: action.message,
+        },
+      };
+    }
+    case "calculate":
+      return { ...state, winner: action.winner, isTie: action.isTie };
+    case "reset":
+      return initialResultState;
+    default:
+      return state;
+  }
+};
 
 export const Scorepad: FC = () => {
   const { t, i18n } = useTranslation();
@@ -19,79 +95,85 @@ export const Scorepad: FC = () => {
   const playerOne = player1.trim() === "" ? t("player1") : player1;
   const playerTwo = player2.trim() === "" ? t("player2") : player2;
 
-  const [total1, setTotal1] = useState<number>(0);
-  const [total2, setTotal2] = useState<number>(0);
-  const [tabActive, setTabActive] = useState<string>(playerOne);
-  const [winner, setWinner] = useState<string | null>(null);
-  const [isTie, setIsTie] = useState<boolean>(false);
-  const [activeVictoryType, setActiveVictoryType] = useState<string>("");
-  const [victoryMessages, setVictoryMessages] = useState<{
-    [key: string]: string;
-  }>({
-    military: "",
-    progress: "",
-    political: "",
-  });
-  const [resetKey, setResetKey] = useState(0);
+  const inputsToUse = useMemo(
+    () => getInputsToUse(showAgora, showPantheon),
+    [showAgora, showPantheon],
+  );
+  const inputsKey = inputsToUse.map((i) => i.id).join(",");
+
+  const [playerValues, setPlayerValues] = useState<{
+    "1": ScoreValues;
+    "2": ScoreValues;
+  }>(() => ({
+    "1": buildInitialValues(inputsToUse),
+    "2": buildInitialValues(inputsToUse),
+  }));
 
   useEffect(() => {
-    if (tabActive === playerOne || tabActive === playerTwo) {
-      setTabActive(playerOne);
-    } else {
-      setTabActive(playerOne);
-    }
-  }, [language]);
+    const fresh = buildInitialValues(inputsToUse);
+    setPlayerValues({ "1": fresh, "2": fresh });
+  }, [inputsToUse, inputsKey]);
 
-  const updateTotal1 = useCallback((newTotal: number) => {
-    setTotal1(newTotal);
-  }, []);
+  const total1 = useMemo(
+    () => calculateTotal(playerValues["1"], inputsToUse),
+    [playerValues, inputsToUse],
+  );
+  const total2 = useMemo(
+    () => calculateTotal(playerValues["2"], inputsToUse),
+    [playerValues, inputsToUse],
+  );
 
-  const updateTotal2 = useCallback((newTotal: number) => {
-    setTotal2(newTotal);
-  }, []);
+  const tabActiveRef = useRef<string>(playerOne);
+  const [result, dispatch] = useReducer(resultReducer, initialResultState);
+  const { winner, isTie, activeVictoryType, victoryMessages } = result;
+
+  useEffect(() => {
+    tabActiveRef.current = playerOne;
+  }, [language, playerOne]);
 
   const handleTabChange = useCallback((activeTab: string) => {
-    setTabActive(activeTab);
+    tabActiveRef.current = activeTab;
   }, []);
+
+  const handlePlayerChange = useCallback(
+    (player: "1" | "2") => (id: string, value: string) => {
+      setPlayerValues((prev) => ({
+        ...prev,
+        [player]: { ...prev[player], [id]: value },
+      }));
+    },
+    [],
+  );
 
   const handleVictory = useCallback(
     (type: string) => {
-      if (activeVictoryType !== "") {
-        return;
-      }
-
-      const message = t("victoryTo", { type, player: tabActive });
-      setVictoryMessages({ ...victoryMessages, [type]: message });
-      setActiveVictoryType(type);
-      setWinner(tabActive);
+      const message = t("victoryTo", { type, player: tabActiveRef.current });
+      dispatch({ type: "victory", victoryType: type, player: tabActiveRef.current, message });
     },
-    [activeVictoryType, tabActive, victoryMessages],
+    [t],
   );
 
   const handleCalculateClick = useCallback(() => {
     if (total1 === 0 && total2 === 0) {
-      setWinner(null);
-      setIsTie(false);
+      dispatch({ type: "calculate", winner: null, isTie: false });
       return;
     }
     if (total1 === total2) {
-      setWinner(null);
-      setIsTie(true);
+      dispatch({ type: "calculate", winner: null, isTie: true });
     } else {
-      setWinner(total1 > total2 ? playerOne : playerTwo);
-      setIsTie(false);
+      dispatch({
+        type: "calculate",
+        winner: total1 > total2 ? playerOne : playerTwo,
+        isTie: false,
+      });
     }
   }, [total1, total2, playerOne, playerTwo]);
 
   const reloadPage = useCallback(() => {
-    setTotal1(0);
-    setTotal2(0);
-    setWinner(null);
-    setIsTie(false);
-    setActiveVictoryType("");
-    setVictoryMessages({ military: "", progress: "", political: "" });
-    setResetKey((prev) => prev + 1);
-  }, []);
+    const fresh = buildInitialValues(inputsToUse);
+    setPlayerValues({ "1": fresh, "2": fresh });
+    dispatch({ type: "reset" });
+  }, [inputsToUse]);
 
   const inputReadOnly = !!winner;
 
@@ -118,19 +200,19 @@ export const Scorepad: FC = () => {
         onTabChange={handleTabChange}
       >
         <SWDscorepad
-          key={`p1-${resetKey}-${language}`}
           name={playerOne}
           showAgora={showAgora}
           showPantheon={showPantheon}
-          onUpdateTotal={updateTotal1}
+          inputValues={playerValues["1"]}
+          onChange={handlePlayerChange("1")}
           readOnly={inputReadOnly}
         />
         <SWDscorepad
-          key={`p2-${resetKey}-${language}`}
           name={playerTwo}
           showAgora={showAgora}
           showPantheon={showPantheon}
-          onUpdateTotal={updateTotal2}
+          inputValues={playerValues["2"]}
+          onChange={handlePlayerChange("2")}
           readOnly={inputReadOnly}
         />
       </SWDtabs>

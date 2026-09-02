@@ -7,6 +7,8 @@ export type SWDheaderProps = {
   title?: string;
 };
 
+const languages = ["la", "en", "es"];
+
 export const SWDheader: FC<SWDheaderProps> = ({
   title = "7 Wonder duel scorepad",
 }) => {
@@ -30,8 +32,6 @@ export const SWDheader: FC<SWDheaderProps> = ({
   }, [menuOpen]);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
-
-  const languages = ["la", "en", "es"];
 
   return (
     <header className={styles.wrapper}>

@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "doctor": "npx react-doctor@latest"
   },
   "dependencies": {
     "i18next": "^26.0.8",
